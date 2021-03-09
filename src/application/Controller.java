@@ -1,6 +1,5 @@
 package application;
 
-import java.io.Console;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,27 +12,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class Controller {
-
+	
+	@FXML TextField usernameTextField;
+	@FXML TextField passwordTextField;
+	@FXML Button selectBtn;
+	@FXML Button insertBtn;
 	@FXML Label textLabel;
-	@FXML TextField textField;
-	@FXML Button button;
-
-	@FXML public void buttonListener() throws SQLException {
+	
+	ConnectionClass connectionClass = new ConnectionClass();
+	Connection connection = connectionClass.getConnection();
+	Statement statement;
+	
+	@FXML public void insertBtnListener() throws SQLException {
 		
-		ConnectionClass connectionClass = new ConnectionClass();
-		Connection connection = connectionClass.getConnection();
-		Statement statement = connection.createStatement();
-
-		String sqlInsert = "INSERT INTO USERS VALUES('" + 001 + "', '" + textField.getText() + "', 'Password123')";
+		statement = connection.createStatement();
+		String sqlInsert = "INSERT INTO USERS VALUES('" + 001 + "', '" + usernameTextField.getText()+ "', '" + passwordTextField.getText() + "')";
 		statement.executeUpdate(sqlInsert);
-		
-		String sqlSelect = "SELECT * FROM USERS;";
-		ResultSet resultSet = statement.executeQuery(sqlSelect);
-		while (resultSet.next()) {
-			textLabel.setText(resultSet.getString(1));
-		}
-		
 		
 	}
 
+	@FXML public void selectBtnListener() throws SQLException {
+		
+		statement = connection.createStatement();
+		
+		String sqlSelect = "SELECT USERNAME, PASSWORD FROM USERS;";
+		ResultSet resultSet = statement.executeQuery(sqlSelect);
+		
+		while (resultSet.next()) {
+			textLabel.setText(resultSet.getNString("USERNAME") + ": " + resultSet.getNString("PASSWORD"));
+		}
+		
+	}
 }
