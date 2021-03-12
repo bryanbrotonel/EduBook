@@ -1,23 +1,31 @@
 package application;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import connectivity.ConnectionClass;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class Controller {
+public class LoginController {
 	
 	@FXML TextField usernameTextField;
 	@FXML TextField passwordTextField;
 	@FXML Button selectBtn;
 	@FXML Button insertBtn;
 	@FXML Label textLabel;
+	@FXML Button registerBtn;
 	
 	ConnectionClass connectionClass = new ConnectionClass();
 	Connection connection = connectionClass.getConnection();
@@ -42,5 +50,15 @@ public class Controller {
 			textLabel.setText(resultSet.getNString("USERNAME") + ": " + resultSet.getNString("PASSWORD"));
 		}
 		
+	}
+
+	@FXML public void registerBtnListener(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
 	}
 }
