@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
@@ -15,8 +16,8 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
 
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import javafx.scene.input.MouseEvent;
 
 public class RegisterController {
@@ -43,6 +44,7 @@ public class RegisterController {
 	// Event Listener on Label[#logInLink].onMouseClicked
 	@FXML
 	public void logInLinkListener(MouseEvent event) throws IOException {
+
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
