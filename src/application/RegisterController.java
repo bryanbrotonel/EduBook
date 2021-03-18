@@ -55,18 +55,28 @@ public class RegisterController {
 		
 		statement = connection.createStatement();
 		
-		if (passMatchCheck()) {
-			String sqlInsert = "INSERT INTO USERS VALUES('" + regFirstNameTextField.getText() + "', '" + 
+		if (!passMatchCheck(regPasswordTextField.getText(), regConfirmPasswordTextField.getText()))
+			regErrorLabel.setText("Passwords don't match.");
+		
+		else if (!isValidEmail(regEmailTextField.getText()))
+			regErrorLabel.setText("Invalid email");
+		
+		else if (checkEmaiExists(regEmailTextField.getText()))
+			regErrorLabel.setText("Email already registered");
+		
+		else {
+			String sqlInsert = "INSERT INTO USERS VALUES('" + regEmailTextField.getText() + "', '" + 
+					regFirstNameTextField.getText() + "', '" + 
 					regLastNameTextField.getText() + "', '" + 
-					regEmailTextField.getText() + "', '" + 
 					regPasswordTextField.getText() + "')";
 			
 			statement.executeUpdate(sqlInsert);
-		}
-		else {
-			regErrorLabel.setText("Passwords don't match.");
+			
+			regErrorLabel.setText("Succesfully registered");
 		}
 		
+		statement.close();
+
 	}
 	
 	// Event Listener on Label[#logInLink].onMouseClicked
@@ -82,11 +92,33 @@ public class RegisterController {
         window.show();
 	}
 	
-	private boolean passMatchCheck() {
+	public boolean isValidEmail(String email) {
+		   String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+		   return email.matches(regex);
+	}
+	
+	public boolean checkEmaiExists(String email) throws SQLException {
+		
+		int count = 0;
+		
+		statement = connection.createStatement();
+		
+		String sqlSelect = "SELECT count(*) FROM USERS WHERE EMAIL='" + regEmailTextField.getText() + "';";
+		System.out.println(sqlSelect);
+		ResultSet resultSet = statement.executeQuery(sqlSelect);
+
+		if(resultSet.next())
+		    count = resultSet.getInt(1);
+				
+		return count >= 1;
+		
+	}
+	
+	private boolean passMatchCheck(String pass, String confirmPass) {
 	    boolean isCorrect = true;
 	    
-	    char[] password = regPasswordTextField.getText().toCharArray();
-	    char[] confirmPassword = regConfirmPasswordTextField.getText().toCharArray();
+	    char[] password = pass.toCharArray();
+	    char[] confirmPassword = confirmPass.toCharArray();
 	    
 	    isCorrect = password.length != confirmPassword.length ? false : Arrays.equals (password, confirmPassword);
 

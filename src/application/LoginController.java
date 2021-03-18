@@ -44,6 +44,7 @@ public class LoginController {
 		statement = connection.createStatement();
 		
 		String sqlSelect = "SELECT * FROM USERS WHERE EMAIL='" + emailTextField.getText() + "';";
+
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 		
 		while (resultSet.next())
