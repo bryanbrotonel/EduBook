@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class LoginController {
 	
-	@FXML TextField usernameTextField;
+	@FXML TextField emailTextField;
 	@FXML TextField passwordTextField;
 	@FXML Button selectBtn;
 	@FXML Button insertBtn;
@@ -34,7 +34,7 @@ public class LoginController {
 	@FXML public void insertBtnListener() throws SQLException {
 		
 		statement = connection.createStatement();
-		String sqlInsert = "INSERT INTO USERS VALUES('" + 001 + "', '" + usernameTextField.getText()+ "', '" + passwordTextField.getText() + "')";
+		String sqlInsert = "INSERT INTO USERS VALUES('" + 001 + "', '" + emailTextField.getText()+ "', '" + passwordTextField.getText() + "')";
 		statement.executeUpdate(sqlInsert);
 		
 	}
@@ -43,12 +43,11 @@ public class LoginController {
 		
 		statement = connection.createStatement();
 		
-		String sqlSelect = "SELECT USERNAME, PASSWORD FROM USERS;";
+		String sqlSelect = "SELECT * FROM USERS WHERE EMAIL='" + emailTextField.getText() + "';";
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 		
-		while (resultSet.next()) {
-			textLabel.setText(resultSet.getNString("USERNAME") + ": " + resultSet.getNString("PASSWORD"));
-		}
+		while (resultSet.next())
+			textLabel.setText(resultSet.getNString("FIRSTNAME") + ", " + resultSet.getNString("LASTNAME") + ", " + resultSet.getNString("EMAIL") + ", " + resultSet.getNString("PASSWORD"));
 		
 	}
 
