@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import connectivity.ConnectionClass;
+import connectivity.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,16 +40,24 @@ public class LoginController {
 		
 	}
 
-	@FXML public void selectBtnListener() throws SQLException {
+	@FXML public void selectBtnListener(ActionEvent event) throws SQLException, IOException {
+		
+		int userFound = 0;
 		
 		statement = connection.createStatement();
 		
-		String sqlSelect = "SELECT * FROM USERS WHERE EMAIL='" + emailTextField.getText() + "';";
+		String sqlSelect = "SELECT count(*) FROM USERS WHERE EMAIL='" + emailTextField.getText() + "';";
 
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 		
 		while (resultSet.next())
-			textLabel.setText(resultSet.getNString("FIRSTNAME") + ", " + resultSet.getNString("LASTNAME") + ", " + resultSet.getNString("EMAIL") + ", " + resultSet.getNString("PASSWORD"));
+			userFound = resultSet.getInt(1);
+		
+		if (userFound >= 1) {
+			UserSession.getInstance(emailTextField.getText());
+			
+			redirectLogIn(event);
+		}
 		
 	}
 
@@ -57,6 +66,19 @@ public class LoginController {
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                
+        window.setScene(tableViewScene);
+        window.show();
+	}
+	
+	public void redirectLogIn(ActionEvent event) throws IOException, SQLException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("Shell.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        UserSession session = UserSession.getInstance(emailTextField.getText());
+        System.out.println(session.toString());
         
         window.setScene(tableViewScene);
         window.show();
