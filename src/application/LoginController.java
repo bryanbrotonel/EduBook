@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -26,21 +28,13 @@ public class LoginController {
 	@FXML Button selectBtn;
 	@FXML Button insertBtn;
 	@FXML Label textLabel;
-	@FXML Button registerBtn;
+	@FXML Text registerBtn;
 	
 	ConnectionClass connectionClass = new ConnectionClass();
 	Connection connection = connectionClass.getConnection();
 	Statement statement;
-	
-	@FXML public void insertBtnListener() throws SQLException {
-		
-		statement = connection.createStatement();
-		String sqlInsert = "INSERT INTO USERS VALUES('" + 001 + "', '" + emailTextField.getText()+ "', '" + passwordTextField.getText() + "')";
-		statement.executeUpdate(sqlInsert);
-		
-	}
 
-	@FXML public void selectBtnListener(ActionEvent event) throws SQLException, IOException {
+	@FXML public void loginBtnListener(ActionEvent event) throws SQLException, IOException {
 		
 		int userFound = 0;
 		
@@ -61,7 +55,7 @@ public class LoginController {
 		
 	}
 
-	@FXML public void registerBtnListener(ActionEvent event) throws IOException {
+	@FXML public void registerBtnListener(MouseEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
@@ -77,8 +71,8 @@ public class LoginController {
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
-        UserSession session = UserSession.getInstance(emailTextField.getText());
-        System.out.println(session.toString());
+//        UserSession session = UserSession.getInstance(emailTextField.getText());
+//        System.out.println(session.toString());
         
         window.setScene(tableViewScene);
         window.show();

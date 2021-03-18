@@ -29,6 +29,22 @@ public final class UserSession {
 		if (instance == null) {
 			String[] data = getUserData(email);
 			instance = new UserSession(data[0], data[1], email, data[3]);
+			System.out.println("getInstance(String email): " + instance.toString());
+		}
+		else {
+			System.out.println("Instance not null: " + instance.toString());
+		}
+		return instance;
+	}
+	
+	public static UserSession getInstance(String firstName, String lastName, String email, String password) {
+		if (instance == null) {
+			instance = new UserSession(firstName, lastName, email, password);
+			System.out.println("getInstance(String firstName, String lastName, String email, String password): " + instance.toString());
+
+		}
+		else {
+			System.out.println("Instance not null: " + instance.toString());
 		}
 		return instance;
 	}
@@ -72,11 +88,8 @@ public final class UserSession {
 		return password;
 	}
 
-	public void cleanUserSession() {
-		firstName = "";// or null
-		lastName = "";// or null
-		email = "";// or null
-		password = "";// or null
+	public static void cleanUserSession() {
+		instance = null;
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 import connectivity.ConnectionClass;
+import connectivity.UserSession;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
@@ -51,28 +52,36 @@ public class RegisterController {
 
 	// Event Listener on Button[#registerUserBtn].onAction
 	@FXML
-	public void registerBtnListener(ActionEvent event) throws SQLException {
+	public void registerBtnListener(ActionEvent event) throws SQLException, IOException {
+		
+		String firstName =  regFirstNameTextField.getText();
+		String lastName = regLastNameTextField.getText();
+		String email = regEmailTextField.getText();
+		String password = regPasswordTextField.getText();
 		
 		statement = connection.createStatement();
 		
-		if (!passMatchCheck(regPasswordTextField.getText(), regConfirmPasswordTextField.getText()))
+		if (!passMatchCheck(password, regConfirmPasswordTextField.getText()))
 			regErrorLabel.setText("Passwords don't match.");
 		
-		else if (!isValidEmail(regEmailTextField.getText()))
+		else if (!isValidEmail(email))
 			regErrorLabel.setText("Invalid email");
 		
-		else if (checkEmaiExists(regEmailTextField.getText()))
+		else if (checkEmaiExists(email))
 			regErrorLabel.setText("Email already registered");
 		
 		else {
-			String sqlInsert = "INSERT INTO USERS VALUES('" + regEmailTextField.getText() + "', '" + 
-					regFirstNameTextField.getText() + "', '" + 
-					regLastNameTextField.getText() + "', '" + 
-					regPasswordTextField.getText() + "')";
+			String sqlInsert = "INSERT INTO USERS VALUES('" + email + "', '" + 
+					firstName + "', '" + 
+					lastName + "', '" + 
+					password + "')";
 			
 			statement.executeUpdate(sqlInsert);
+						
+			UserSession newSession = UserSession.getInstance(firstName, lastName, email, password);
+			System.out.println(newSession.toString());
 			
-			regErrorLabel.setText("Succesfully registered");
+			redirectRegistered(event);
 		}
 		
 		statement.close();
@@ -104,7 +113,6 @@ public class RegisterController {
 		statement = connection.createStatement();
 		
 		String sqlSelect = "SELECT count(*) FROM USERS WHERE EMAIL='" + regEmailTextField.getText() + "';";
-		System.out.println(sqlSelect);
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 
 		if(resultSet.next())
@@ -127,6 +135,16 @@ public class RegisterController {
 	    Arrays.fill(confirmPassword,'0');
 
 	    return isCorrect;
+	}
+	
+	private void redirectRegistered(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("Shell.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
 	}
 	
 }
