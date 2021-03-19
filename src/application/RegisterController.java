@@ -71,10 +71,11 @@ public class RegisterController {
 			regErrorLabel.setText("Email already registered");
 		
 		else {
-			String sqlInsert = "INSERT INTO USERS VALUES('" + email + "', '" + 
-					firstName + "', '" + 
+			String sqlInsert = "INSERT INTO USERS(FirstName, LastName, Email, Password, Privileges) VALUES('" + firstName + "', '" + 
 					lastName + "', '" + 
-					password + "')";
+					email + "', '" + 
+					password + "', '" +
+					0 + "')";
 			
 			statement.executeUpdate(sqlInsert);
 						

@@ -1,6 +1,9 @@
 # classpath
 .classpath
 
+#bin Files
+bin/
+
 # Compiled class file
 *.class
 

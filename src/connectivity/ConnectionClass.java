@@ -14,7 +14,7 @@ public class ConnectionClass {
 		String password="Password123";
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			connection = DriverManager.getConnection("jdbc:mysql://localhost/" + dbName,userName,password);
 			

@@ -63,10 +63,10 @@ public final class UserSession {
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 		
 		while (resultSet.next()) {
-			userData[0] = resultSet.getString("FIRSTNAME");
-			userData[1] = resultSet.getString("LASTNAME");
+			userData[0] = resultSet.getString("FirstName");
+			userData[1] = resultSet.getString("LastName");
 			userData[2] = email;
-			userData[3] = resultSet.getString("PASSWORD");
+			userData[3] = resultSet.getString("Password");
 		}
 		return userData;
 		
