@@ -6,7 +6,6 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import connectivity.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.UserSession;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -33,8 +33,6 @@ public class ShellController {
 	Text dashboardNav;
 	@FXML
 	Text logOutBtn;
-
-	DashboardController dashboard = new DashboardController();
 
 	@FXML
 	void initialize() throws SQLException {

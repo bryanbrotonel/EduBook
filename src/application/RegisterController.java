@@ -18,13 +18,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 import connectivity.ConnectionClass;
-import connectivity.UserSession;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
 
 import javafx.stage.Stage;
-
+import models.UserSession;
 import javafx.scene.input.MouseEvent;
 
 public class RegisterController {
