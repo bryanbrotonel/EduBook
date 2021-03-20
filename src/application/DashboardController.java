@@ -20,12 +20,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.Appointment;
 import models.UserSession;
 
 public class DashboardController extends BorderPane {
-
-	int a = 0;
 
 	UserSession currSession;
 
@@ -62,14 +62,14 @@ public class DashboardController extends BorderPane {
 	}
 
 	@FXML
-	void initialize() throws SQLException {
+	public void initialize() throws SQLException {
 		greetingText.setText("Hello, " + currSession.getFirstName());
 
 		setUpTable();
 
 	}
 
-	void setUpTable() throws SQLException {
+	public void setUpTable() throws SQLException {
 		apptCol.setCellValueFactory(new PropertyValueFactory<>("ApptTitle"));
 		profCol.setCellValueFactory(new PropertyValueFactory<>("ApptProfessor"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("ApptDate"));
@@ -81,7 +81,7 @@ public class DashboardController extends BorderPane {
 
 	}
 
-	void populateApptTable() throws SQLException {
+	public void populateApptTable() throws SQLException {
 
 		apptData = new ArrayList<Appointment>();
 
@@ -105,5 +105,5 @@ public class DashboardController extends BorderPane {
 
 		}
 	}
-
+	
 }

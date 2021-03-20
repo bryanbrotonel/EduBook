@@ -23,8 +23,6 @@
 						<Font name="System Bold" size="16.0" />
 					</font>
 				</Text>
-				<Button fx:id="bookApptBtn" layoutX="479.0" layoutY="56.0"
-					mnemonicParsing="false" text="Book Apointment" />
 			</children>
 		</AnchorPane>
 	</top>

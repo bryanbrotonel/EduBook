@@ -70,4 +70,13 @@ public class ShellController {
 		window.show();
 
 	}
+	
+	@FXML
+	public void bookApptBtnListener() throws SQLException {
+		System.out.println("bookApptBtn()");
+		
+		BookAppointmentController bookAppt = new BookAppointmentController();
+		
+		mainPane.setCenter(bookAppt);
+	}
 }
