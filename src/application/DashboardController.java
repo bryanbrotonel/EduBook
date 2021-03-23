@@ -3,10 +3,6 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import models.Appointment;
 import models.UserSession;
 
@@ -65,7 +59,7 @@ public class DashboardController extends BorderPane {
 	public void initialize() throws SQLException {
 		greetingText.setText("Hello, " + currSession.getFirstName());
 
-		setUpTable();
+//		setUpTable();
 
 	}
 

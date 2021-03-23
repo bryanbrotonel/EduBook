@@ -21,7 +21,7 @@ public class Appointment {
 
 	public Appointment(int apptID, String apptTitle, String apptTime, String apptDate, String apptStudent,
 			String apptProfessor) {
-		
+
 		this.apptID = new SimpleIntegerProperty(apptID);
 		this.apptTitle = new SimpleStringProperty(apptTitle);
 		this.apptTime = new SimpleStringProperty(apptTime);
