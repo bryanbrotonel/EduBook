@@ -14,17 +14,19 @@ public class Appointment {
 
 	private SimpleIntegerProperty apptID;
 	private SimpleStringProperty apptTitle;
-	private SimpleStringProperty apptTime;
+	private SimpleStringProperty apptStartTime;
+	private SimpleStringProperty apptEndTime;
 	private SimpleStringProperty apptDate;
 	private SimpleStringProperty apptStudent;
 	private SimpleStringProperty apptProfessor;
 
-	public Appointment(int apptID, String apptTitle, String apptTime, String apptDate, String apptStudent,
+	public Appointment(int apptID, String apptTitle, String apptDate, String apptStartTime, String apptEndTime,  String apptStudent,
 			String apptProfessor) {
 
 		this.apptID = new SimpleIntegerProperty(apptID);
 		this.apptTitle = new SimpleStringProperty(apptTitle);
-		this.apptTime = new SimpleStringProperty(apptTime);
+		this.apptStartTime = new SimpleStringProperty(apptStartTime);
+		this.apptEndTime = new SimpleStringProperty(apptEndTime);
 		this.apptDate = new SimpleStringProperty(apptDate);
 		this.apptStudent = new SimpleStringProperty(apptStudent);
 		this.apptProfessor = new SimpleStringProperty(apptProfessor);
@@ -46,13 +48,21 @@ public class Appointment {
 	public void setApptTitle(String apptTitle) {
 		this.apptTitle = new SimpleStringProperty(apptTitle);
 	}
-
-	public String getApptTime() {
-		return apptTime.get();
+	
+	public String getApptStartTime() {
+		return apptStartTime.get();
 	}
 
-	public void setApptTime(String apptTime) {
-		this.apptTime = new SimpleStringProperty(apptTime);
+	public void stApptStartTime(String apptStartTime) {
+		this.apptStartTime = new SimpleStringProperty(apptStartTime);
+	}
+
+	public String getApptEndTime() {
+		return apptEndTime.get();
+	}
+
+	public void stApptEndTime(String apptEndTime) {
+		this.apptEndTime = new SimpleStringProperty(apptEndTime);
 	}
 
 	public String getApptDate() {

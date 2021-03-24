@@ -39,8 +39,10 @@
 							text="Professor" />
 						<TableColumn fx:id="dateCol" prefWidth="87.0"
 							text="Date" />
-						<TableColumn fx:id="timeCol" prefWidth="72.0"
-							text="Time" />
+						<TableColumn fx:id="startTimeCol" prefWidth="72.0"
+							text="Start Time" />
+						<TableColumn fx:id="endTimeCol" prefWidth="72.0"
+							text="End Time" />
 					</columns>
 				</TableView>
 			</children>

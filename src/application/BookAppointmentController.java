@@ -5,14 +5,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Date;
 
 import connectivity.ConnectionClass;
 import javafx.beans.value.ChangeListener;
@@ -76,6 +73,56 @@ public class BookAppointmentController extends AnchorPane {
 		configProfPicker();
 		configStartTimePicker();
 		configEndTimePicker();
+	}
+	
+	public void scheduleApptBtnListener() throws SQLException {
+		System.out.println("scheduleApptBtnListener()");
+
+		if (apptTitleTextField.getText() == "")
+			errMsgText.setText("Please fill in the Appointment title.");
+		else if (profTextField.getValue() == null)
+			errMsgText.setText("Please specify a Professor.");
+		else if (apptDatePicker.getValue() == null)
+			errMsgText.setText("Please specify an Appiontment date.");
+		else if (apptStartTimePicker.getValue() == null)
+			errMsgText.setText("Please specify an Appiontment start time.");
+		else if (apptEndTimePicker.getValue() == null)
+			errMsgText.setText("Please specify an Appiontment end time.");
+		else {
+
+			String apptTitle = apptTitleTextField.getText();
+			System.out.print("[" + apptTitle + ", ");
+
+			String apptProf = getProfEmail(profTextField.getValue());
+			System.out.print(apptProf + ", ");
+
+			LocalDate apptDate = apptDatePicker.getValue();
+			System.out.print(apptDate + ", ");
+
+			String apptStartTime = apptStartTimePicker.getValue();
+			System.out.print(apptStartTime + ", ");
+
+			String apptEndTime = apptEndTimePicker.getValue();
+			System.out.println(apptEndTime + "]");
+			
+			scheduleAppointment(apptTitle, apptProf, apptDate, apptStartTime, apptEndTime);
+		}
+
+	}
+	
+	public void scheduleAppointment(String apptTitle, String apptProf, LocalDate apptDate, String apptStartTime, String apptEndTime) throws SQLException {
+		
+		statement = connection.createStatement();
+		
+		String sqlInsert = "INSERT INTO APPOINTMENTS(Title, Date, StartTime, EndTime, Student, Professor) VALUES('" + apptTitle + "', '" + 
+				apptDate + "', '" + 
+				apptStartTime + "', '" + 
+				apptEndTime + "', '" +
+				currSession.getEmail() + "', '" +
+				apptProf + "')";
+		
+		statement.executeUpdate(sqlInsert);
+		
 	}
 
 	public void configDatePicker() {
@@ -150,39 +197,6 @@ public class BookAppointmentController extends AnchorPane {
 			cal.add(Calendar.MINUTE, 30);
 			if (getCalendarSeconds(cal) <= getCalendarSeconds(endOfDay))
 				apptEndTimePicker.getItems().add(df.format(cal.getTime()));
-		}
-
-	}
-
-	public void scheduleApptBtnListener() throws SQLException {
-		System.out.println("scheduleApptBtnListener()");
-
-		if (apptTitleTextField.getText() == "")
-			errMsgText.setText("Please fill in the Appointment title.");
-		else if (profTextField.getValue() == null)
-			errMsgText.setText("Please specify a Professor.");
-		else if (apptDatePicker.getValue() == null)
-			errMsgText.setText("Please specify an Appiontment date.");
-		else if (apptStartTimePicker.getValue() == null)
-			errMsgText.setText("Please specify an Appiontment start time.");
-		else if (apptEndTimePicker.getValue() == null)
-			errMsgText.setText("Please specify an Appiontment end time.");
-		else {
-
-			String apptTitle = apptTitleTextField.getText();
-			System.out.print("[" + apptTitle + ", ");
-
-			String apptProf = getProfEmail(profTextField.getValue());
-			System.out.print(apptProf + ", ");
-
-			LocalDate localDate = apptDatePicker.getValue();
-			System.out.print(localDate + ", ");
-
-			String apptStartTime = apptStartTimePicker.getValue();
-			System.out.print(apptStartTime + ", ");
-
-			String apptEndTime = apptEndTimePicker.getValue();
-			System.out.println(apptEndTime + "]");
 		}
 
 	}

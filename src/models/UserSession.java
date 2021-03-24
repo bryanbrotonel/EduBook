@@ -2,6 +2,7 @@ package models;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -78,7 +79,6 @@ public final class UserSession {
 
 	public List<String[]> getAppt(String email) throws SQLException {
 		ArrayList<String[]> appointments = new ArrayList<String[]>();
-		int numberColumns = 5;
 
 		ConnectionClass connectionClass = new ConnectionClass();
 		Connection connection = connectionClass.getConnection();
@@ -89,12 +89,14 @@ public final class UserSession {
 		String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE Student='" + email + "';";
 
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
+		ResultSetMetaData resultSetMD = resultSet.getMetaData();
+		int numberOfCol = resultSetMD.getColumnCount();
 
 		while (resultSet.next()) {
 
-			String[] currentRow = new String[numberColumns];
+			String[] currentRow = new String[numberOfCol];
 
-			for (int i = 1; i <= numberColumns; i++) {
+			for (int i = 1; i <= numberOfCol; i++) {
 				currentRow[i - 1] = resultSet.getString(i);
 			}
 

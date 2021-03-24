@@ -34,7 +34,9 @@ public class DashboardController extends BorderPane {
 	@FXML
 	TableColumn<Appointment, String> dateCol;
 	@FXML
-	TableColumn<Appointment, String> timeCol;
+	TableColumn<Appointment, String> startTimeCol;
+	@FXML
+	TableColumn<Appointment, String> endTimeCol;
 
 	ObservableList<Appointment> tableData;
 
@@ -59,7 +61,7 @@ public class DashboardController extends BorderPane {
 	public void initialize() throws SQLException {
 		greetingText.setText("Hello, " + currSession.getFirstName());
 
-//		setUpTable();
+		setUpTable();
 
 	}
 
@@ -67,7 +69,8 @@ public class DashboardController extends BorderPane {
 		apptCol.setCellValueFactory(new PropertyValueFactory<>("ApptTitle"));
 		profCol.setCellValueFactory(new PropertyValueFactory<>("ApptProfessor"));
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("ApptDate"));
-		timeCol.setCellValueFactory(new PropertyValueFactory<>("ApptTime"));
+		startTimeCol.setCellValueFactory(new PropertyValueFactory<>("ApptStartTime"));
+		endTimeCol.setCellValueFactory(new PropertyValueFactory<>("ApptEndTime"));
 
 		populateApptTable();
 
@@ -84,16 +87,15 @@ public class DashboardController extends BorderPane {
 		for (String[] row : appointments) {
 			System.out.println(Arrays.toString(row));
 
-			String timestamp = Timestamp.valueOf(row[2]).toString();
-
 			int idValue = Integer.valueOf(row[0]);
 			String titleValue = row[1];
-			String timeValue = timestamp.substring(timestamp.length() - 10);;
-			String dateValue = timestamp.substring(0, 10);
-			String studentValue = row[3];
-			String professorValue = row[4];
+			String dateValue = row[2];
+			String startTimeValue = row[3];
+			String endTimeValue = row[4];
+			String studentValue = row[5];
+			String professorValue = row[6];
 
-			apptData.add(new Appointment(idValue, titleValue, timeValue, dateValue, studentValue, professorValue));
+			apptData.add(new Appointment(idValue, titleValue, dateValue, startTimeValue, endTimeValue, studentValue, professorValue));
 
 			tableData = FXCollections.observableArrayList(apptData);
 
