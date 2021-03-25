@@ -6,15 +6,16 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import connectivity.UserSession;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.UserSession;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -22,7 +23,7 @@ import javafx.scene.input.MouseEvent;
  *
  */
 
-public class ShellController {
+public class ShellController extends AnchorPane {
 
 	@FXML
 	BorderPane mainPane;
@@ -34,8 +35,6 @@ public class ShellController {
 	@FXML
 	Text logOutBtn;
 
-	DashboardController dashboard = new DashboardController();
-
 	@FXML
 	void initialize() throws SQLException {
 
@@ -44,16 +43,20 @@ public class ShellController {
 
 	@FXML
 	public void dashboardBtnListener() throws SQLException {
-		DashboardController dashboard = new DashboardController();
+		DashboardController dashboardController = new DashboardController();
 
 		System.out.println("dashboardBtnListener()");
 
-		mainPane.setCenter(dashboard);
+		mainPane.setCenter(dashboardController);
 	}
 
 	@FXML
 	public void settingsBtnListener() throws SQLException {
+		SettingsController settingsController = new SettingsController();
+		
 		System.out.println("settingsBtnListener()");
+		
+		mainPane.setCenter(settingsController);
 
 	}
 
@@ -71,5 +74,14 @@ public class ShellController {
 		window.setScene(tableViewScene);
 		window.show();
 
+	}
+	
+	@FXML
+	public void bookApptBtnListener() throws SQLException {
+		System.out.println("bookApptBtn()");
+		
+		BookAppointmentController bookAppt = new BookAppointmentController();
+		
+		mainPane.setCenter(bookAppt);
 	}
 }

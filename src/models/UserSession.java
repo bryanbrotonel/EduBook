@@ -1,14 +1,19 @@
-package connectivity;
+package models;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import connectivity.ConnectionClass;
 
 public final class UserSession {
 
 	private static UserSession instance;
-	
+
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -20,7 +25,7 @@ public final class UserSession {
 		this.email = email;
 		this.password = password;
 	}
-	
+
 	public static UserSession getInstance() {
 		return instance;
 	}
@@ -30,57 +35,87 @@ public final class UserSession {
 			String[] data = getUserData(email);
 			instance = new UserSession(data[0], data[1], email, data[3]);
 			System.out.println("getInstance(String email): " + instance.toString());
-		}
-		else {
+		} else {
 			System.out.println("Instance not null: " + instance.toString());
 		}
 		return instance;
 	}
-	
+
 	public static UserSession getInstance(String firstName, String lastName, String email, String password) {
 		if (instance == null) {
 			instance = new UserSession(firstName, lastName, email, password);
-			System.out.println("getInstance(String firstName, String lastName, String email, String password): " + instance.toString());
+			System.out.println("getInstance(String firstName, String lastName, String email, String password): "
+					+ instance.toString());
 
-		}
-		else {
+		} else {
 			System.out.println("Instance not null: " + instance.toString());
 		}
 		return instance;
 	}
-	
+
 	public static String[] getUserData(String email) throws SQLException {
 		String[] userData = new String[5];
-		
+
 		ConnectionClass connectionClass = new ConnectionClass();
 		Connection connection = connectionClass.getConnection();
 		Statement statement;
-		
+
 		statement = connection.createStatement();
-		
+
 		String sqlSelect = "SELECT * FROM USERS WHERE EMAIL='" + email + "';";
 
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
-		
+
 		while (resultSet.next()) {
 			userData[0] = resultSet.getString("FirstName");
 			userData[1] = resultSet.getString("LastName");
 			userData[2] = email;
 			userData[3] = resultSet.getString("Password");
 		}
+
 		return userData;
-		
+
 	}
-	
+
+	public List<String[]> getAppt(String email) throws SQLException {
+		ArrayList<String[]> appointments = new ArrayList<String[]>();
+
+		ConnectionClass connectionClass = new ConnectionClass();
+		Connection connection = connectionClass.getConnection();
+		Statement statement;
+
+		statement = connection.createStatement();
+
+		String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE Student='" + email + "';";
+
+		ResultSet resultSet = statement.executeQuery(sqlSelect);
+		ResultSetMetaData resultSetMD = resultSet.getMetaData();
+		int numberOfCol = resultSetMD.getColumnCount();
+
+		while (resultSet.next()) {
+
+			String[] currentRow = new String[numberOfCol];
+
+			for (int i = 1; i <= numberOfCol; i++) {
+				currentRow[i - 1] = resultSet.getString(i);
+			}
+
+			appointments.add(currentRow);
+		}
+
+		return appointments;
+
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
 
-	public String getemail() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -94,6 +129,7 @@ public final class UserSession {
 
 	@Override
 	public String toString() {
-		return "UserSession{" + "firstName='" + firstName + '\'' + "lastName='" + lastName + '\'' + "email='" + email + '\'' + ", password=" + password + '}';
+		return "UserSession{" + "firstName='" + firstName + '\'' + "lastName='" + lastName + '\'' + "email='" + email
+				+ '\'' + ", password=" + password + '}';
 	}
 }

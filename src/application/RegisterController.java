@@ -18,13 +18,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 import connectivity.ConnectionClass;
-import connectivity.UserSession;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
 
 import javafx.stage.Stage;
-
+import models.UserSession;
 import javafx.scene.input.MouseEvent;
 
 public class RegisterController {
@@ -71,11 +70,10 @@ public class RegisterController {
 			regErrorLabel.setText("Email already registered");
 		
 		else {
-			String sqlInsert = "INSERT INTO USERS(FirstName, LastName, Email, Password, Privileges) VALUES('" + firstName + "', '" + 
+			String sqlInsert = "INSERT INTO USERS(FirstName, LastName, Email, Password) VALUES('" + firstName + "', '" + 
 					lastName + "', '" + 
 					email + "', '" + 
-					password + "', '" +
-					0 + "')";
+					password + "')";
 			
 			statement.executeUpdate(sqlInsert);
 						
