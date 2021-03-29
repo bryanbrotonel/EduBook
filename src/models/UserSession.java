@@ -25,7 +25,7 @@ public final class UserSession {
 		this.email = email;
 		this.password = password;
 	}
-
+	
 	public static UserSession getInstance() {
 		return instance;
 	}
@@ -35,22 +35,13 @@ public final class UserSession {
 			String[] data = getUserData(email);
 			instance = new UserSession(data[0], data[1], email, data[3]);
 			System.out.println("getInstance(String email): " + instance.toString());
-		} else {
-			System.out.println("Instance not null: " + instance.toString());
 		}
 		return instance;
 	}
 
 	public static UserSession getInstance(String firstName, String lastName, String email, String password) {
-		if (instance == null) {
-			instance = new UserSession(firstName, lastName, email, password);
-			System.out.println("getInstance(String firstName, String lastName, String email, String password): "
-					+ instance.toString());
 
-		} else {
-			System.out.println("Instance not null: " + instance.toString());
-		}
-		return instance;
+		return instance == null ? instance = new UserSession(firstName, lastName, email, password) : null;
 	}
 
 	public static String[] getUserData(String email) throws SQLException {

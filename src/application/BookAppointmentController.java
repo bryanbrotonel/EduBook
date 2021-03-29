@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import connectivity.ConnectionClass;
@@ -49,6 +51,7 @@ public class BookAppointmentController extends AnchorPane {
 	Text errMsgText;
 
 	String[] apptData;
+	ArrayList<String> profSchedule;
 	Calendar endOfDay;
 
 	ConnectionClass connectionClass = new ConnectionClass();
@@ -90,10 +93,10 @@ public class BookAppointmentController extends AnchorPane {
 
 	@FXML
 	public void initialize() throws SQLException, ParseException {
-		setEndOfDay();
 
-		configDatePicker();
+		setEndOfDay();
 		configProfPicker();
+		configDatePicker();
 		configStartTimePicker();
 		configEndTimePicker();
 
@@ -152,7 +155,6 @@ public class BookAppointmentController extends AnchorPane {
 	}
 
 	public void scheduleApptBtnListener() throws SQLException {
-		System.out.println("scheduleApptBtnListener()");
 
 		if (apptTitleTextField.getText() == "")
 			errMsgText.setText("Please fill in the Appointment title.");
@@ -217,6 +219,8 @@ public class BookAppointmentController extends AnchorPane {
 
 	public void configProfPicker() throws SQLException {
 
+		profSchedule = null;
+
 		statement = connection.createStatement();
 
 		String sqlSelect = "SELECT * FROM PROFESSORS";
@@ -228,16 +232,83 @@ public class BookAppointmentController extends AnchorPane {
 
 	}
 
-	public void configStartTimePicker() throws ParseException {
-		DateFormat df = new SimpleDateFormat("HH:mm");
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY, 9);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
+	public void configStartTimePicker() throws ParseException, SQLException {
 
-		while (getCalendarSeconds(cal) < getCalendarSeconds(endOfDay)) {
-			apptStartTimePicker.getItems().add(df.format(cal.getTime()));
-			cal.add(Calendar.MINUTE, 30);
+		profTextField.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				try {
+					setStartTimes();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+
+		apptDatePicker.valueProperty().addListener(new ChangeListener<LocalDate>() {
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
+					LocalDate newValue) {
+				try {
+					setStartTimes();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
+	}
+
+	public void setStartTimes() throws SQLException {
+
+		if (profTextField.getValue() != null && apptDatePicker.getValue() != null) {
+
+			apptStartTimePicker.getItems().clear();
+
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.HOUR_OF_DAY, 9);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+
+			LocalDate dateValue = apptDatePicker.getValue();
+			String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE PROFESSOR='" + getProfEmail(profTextField.getValue())
+					+ "' AND DATE='" + dateValue.format(DateTimeFormatter.ISO_LOCAL_DATE) + "';";
+
+			profSchedule = new ArrayList<String>();
+			ResultSet resultSet = statement.executeQuery(sqlSelect);
+
+			while (resultSet.next()) {
+
+				String startTime = resultSet.getString("STARTTIME");
+				String endTime = resultSet.getString("ENDTIME");
+
+				Calendar startTimeCal = parseTime(startTime);
+				Calendar endTimeCal = parseTime(endTime);
+
+				while (getCalendarSeconds(startTimeCal) < getCalendarSeconds(endTimeCal)) {
+
+					String timeValue = formatTime(startTimeCal);
+
+					if (!profSchedule.contains(timeValue))
+						profSchedule.add(timeValue);
+
+					startTimeCal.add(Calendar.MINUTE, 30);
+				}
+			}
+
+			while (getCalendarSeconds(cal) < getCalendarSeconds(endOfDay)) {
+				String timeValue = formatTime(cal);
+
+				if (!profSchedule.contains(timeValue))
+					apptStartTimePicker.getItems().add(timeValue);
+
+				cal.add(Calendar.MINUTE, 30);
+			}
 		}
 
 	}
@@ -257,21 +328,19 @@ public class BookAppointmentController extends AnchorPane {
 	}
 
 	public void setEndTimes(String startTime) throws ParseException {
-		DateFormat df = new SimpleDateFormat("HH:mm");
-		Calendar cal = Calendar.getInstance();
-
-		String[] values = startTime.split(":");
-
-		cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(values[0]));
-		cal.set(Calendar.MINUTE, Integer.parseInt(values[1]));
-		cal.set(Calendar.SECOND, 0);
+		Calendar cal = parseTime(startTime);
 
 		apptEndTimePicker.getItems().clear();
 
-		for (int i = 0; i < 2; i++) {
+		cal.add(Calendar.MINUTE, 30);
+
+		String timeValue = formatTime(cal);
+		apptEndTimePicker.getItems().add(timeValue);
+
+		if ((getCalendarSeconds(cal) < getCalendarSeconds(endOfDay)) && !profSchedule.contains(timeValue)) {
 			cal.add(Calendar.MINUTE, 30);
-			if (getCalendarSeconds(cal) <= getCalendarSeconds(endOfDay))
-				apptEndTimePicker.getItems().add(df.format(cal.getTime()));
+			apptEndTimePicker.getItems().add(formatTime(cal));
+
 		}
 
 	}
@@ -306,13 +375,31 @@ public class BookAppointmentController extends AnchorPane {
 		endOfDay.set(Calendar.SECOND, 0);
 	}
 
+	public Calendar parseTime(String time) {
+		Calendar cal = Calendar.getInstance();
+
+		String[] values = time.split(":");
+
+		cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(values[0]));
+		cal.set(Calendar.MINUTE, Integer.parseInt(values[1]));
+		cal.set(Calendar.SECOND, 0);
+
+		return cal;
+	}
+
+	public String formatTime(Calendar cal) {
+		DateFormat df = new SimpleDateFormat("HH:mm");
+
+		return df.format(cal.getTime());
+	}
+
 	public int getCalendarSeconds(Calendar cal) {
 		return cal.get(Calendar.HOUR_OF_DAY) * 60 * 60 + cal.get(Calendar.MINUTE) * 60 + cal.get(Calendar.SECOND);
 	}
 
 	public void redirectToDashboard() {
 		DashboardController dashboardController = new DashboardController();
-		
+
 		dashboardController.setShellBorderPane(shellPane);
 		this.shellPane.setCenter(dashboardController);
 	}

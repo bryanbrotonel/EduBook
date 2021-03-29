@@ -78,6 +78,15 @@ public class DashboardController extends BorderPane {
 		setUpTable();
 
 	}
+	
+	public void bookApptBtnListener() throws SQLException {
+		
+		BookAppointmentController bookAppt = new BookAppointmentController();
+				
+		bookAppt.setShellBorderPane(shellPane);
+
+		shellPane.setCenter(bookAppt);
+	}
 
 	public void setUpTable() throws SQLException {
 		apptCol.setCellValueFactory(new PropertyValueFactory<>("ApptTitle"));
@@ -160,7 +169,7 @@ public class DashboardController extends BorderPane {
 	}
 
 	public void setShellBorderPane(BorderPane pane) {
-		shellPane = pane;
+		this.shellPane = pane;
 	}
 
 }

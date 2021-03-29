@@ -4,12 +4,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root type="AnchorPane" prefHeight="560" prefWidth="650" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Text fx:id="settingsText" layoutX="59.0" layoutY="76" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="83.21630859375">
-         <font>
-            <Font size="16" />
-         </font>
-      </Text>
-   </children>
+<fx:root type="AnchorPane" prefHeight="560" prefWidth="650"
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml">
+	<children>
+		<Text fx:id="settingsText" layoutX="59.0" layoutY="76"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Settings"
+			wrappingWidth="83.21630859375">
+			<font>
+				<Font size="16" />
+			</font>
+		</Text>
+	</children>
 </fx:root>
