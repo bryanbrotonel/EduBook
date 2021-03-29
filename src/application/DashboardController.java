@@ -1,23 +1,25 @@
 package application;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import connectivity.ConnectionClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 import models.Appointment;
 import models.UserSession;
 
@@ -43,8 +45,12 @@ public class DashboardController extends BorderPane {
 	TableColumn<Appointment, String> editCol;
 	@FXML
 	Button bookApptBtn;
+	@FXML
+	Text dashboardErrorText;
 
 	BorderPane shellPane;
+
+	Appointment selectedAppt;
 
 	ObservableList<Appointment> tableData;
 
@@ -80,51 +86,16 @@ public class DashboardController extends BorderPane {
 		startTimeCol.setCellValueFactory(new PropertyValueFactory<>("ApptStartTime"));
 		endTimeCol.setCellValueFactory(new PropertyValueFactory<>("ApptEndTime"));
 
-		Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>> cellFactory = new Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>>() {
-			@Override
-			public TableCell<Appointment, String> call(final TableColumn<Appointment, String> param) {
-				final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
-					final Button btn = new Button("Edit");
-
-					@Override
-					public void updateItem(String item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-							setText(null);
-						} else {
-							btn.setOnAction(event -> {
-								Appointment appointment = getTableView().getItems().get(getIndex());
-								System.out.println(appointment.getApptTitle());
-
-								BookAppointmentController editAppt;
-
-								try {
-									editAppt = new BookAppointmentController(appointment.getApptTitle(),
-											appointment.getApptProfessor(), appointment.getApptDate(),
-											appointment.getApptStartTime(), appointment.getApptEndTime());
-									editAppt.setShellBorderPane(shellPane);
-									shellPane.setCenter(editAppt);
-								} catch (SQLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-
-							});
-							setGraphic(btn);
-							setText(null);
-						}
-					}
-				};
-				return cell;
-			}
-		};
-
-		editCol.setCellFactory(cellFactory);
+		apptTable.setRowFactory(tv -> {
+			TableRow<Appointment> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 1 && (!row.isEmpty()))
+					selectedAppt = row.getItem();
+			});
+			return row;
+		});
 
 		populateApptTable();
-
-		apptTable.setItems(tableData);
 
 	}
 
@@ -135,7 +106,6 @@ public class DashboardController extends BorderPane {
 		List<String[]> appointments = currSession.getAppt(currSession.getEmail());
 
 		for (String[] row : appointments) {
-			System.out.println(Arrays.toString(row));
 
 			int idValue = Integer.valueOf(row[0]);
 			String titleValue = row[1];
@@ -151,6 +121,42 @@ public class DashboardController extends BorderPane {
 			tableData = FXCollections.observableArrayList(apptData);
 
 		}
+
+		apptTable.setItems(tableData);
+	}
+
+	public void editApptBtnListener() throws SQLException {
+
+		if (selectedAppt == null)
+			dashboardErrorText.setText("Select an appointment to edit");
+		else {
+			BookAppointmentController editAppt = new BookAppointmentController(selectedAppt);
+
+			editAppt.setShellBorderPane(shellPane);
+			shellPane.setCenter(editAppt);
+		}
+
+	}
+
+	public void deleteApptBtnListener(ActionEvent event) throws SQLException, IOException {
+
+		if (selectedAppt == null)
+			dashboardErrorText.setText("Select an appointment to delete");
+		else {
+			ConnectionClass connectionClass = new ConnectionClass();
+			Connection connection = connectionClass.getConnection();
+			Statement statement = connection.createStatement();
+
+			String sqlDelete = "DELETE FROM APPOINTMENTS WHERE ID = " + selectedAppt.getApptID() + ";";
+
+			statement.execute(sqlDelete);
+
+			selectedAppt = null;
+
+			apptTable.getItems().clear();
+			populateApptTable();
+		}
+
 	}
 
 	public void setShellBorderPane(BorderPane pane) {

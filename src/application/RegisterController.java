@@ -77,8 +77,7 @@ public class RegisterController {
 			
 			statement.executeUpdate(sqlInsert);
 						
-			UserSession newSession = UserSession.getInstance(firstName, lastName, email, password);
-			System.out.println(newSession.toString());
+			UserSession.getInstance(firstName, lastName, email, password);
 			
 			redirectRegistered(event);
 		}

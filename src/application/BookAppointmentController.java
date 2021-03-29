@@ -10,7 +10,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Calendar;
 
 import connectivity.ConnectionClass;
@@ -25,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import models.Appointment;
 import models.UserSession;
 
 public class BookAppointmentController extends AnchorPane {
@@ -70,8 +70,7 @@ public class BookAppointmentController extends AnchorPane {
 		}
 	}
 
-	public BookAppointmentController(String apptTitle, String apptProf, String apptDate, String apptStartTime,
-			String apptEndTime) throws SQLException {
+	public BookAppointmentController(Appointment appt) throws SQLException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BookAppointment.fxml"));
 
 		fxmlLoader.setRoot(this);
@@ -79,9 +78,8 @@ public class BookAppointmentController extends AnchorPane {
 
 		currSession = UserSession.getInstance();
 
-		setApptData(apptTitle, apptProf, apptDate, apptStartTime, apptEndTime);
-
-		System.out.println(Arrays.toString(apptData));
+		setApptData(appt.getApptTitle(), appt.getApptProfessor(), appt.getApptDate(), appt.getApptStartTime(),
+				appt.getApptEndTime());
 
 		try {
 			fxmlLoader.load();
@@ -134,7 +132,6 @@ public class BookAppointmentController extends AnchorPane {
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 		ResultSetMetaData resultSetMD = resultSet.getMetaData();
 		int numberOfCol = resultSetMD.getColumnCount();
-		System.out.println(numberOfCol);
 
 		apptData = new String[numberOfCol];
 
@@ -316,6 +313,7 @@ public class BookAppointmentController extends AnchorPane {
 	public void redirectToDashboard() {
 		DashboardController dashboardController = new DashboardController();
 		
+		dashboardController.setShellBorderPane(shellPane);
 		this.shellPane.setCenter(dashboardController);
 	}
 
