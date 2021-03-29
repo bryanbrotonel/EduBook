@@ -10,11 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import models.Appointment;
 import models.UserSession;
 
@@ -36,6 +39,12 @@ public class DashboardController extends BorderPane {
 	TableColumn<Appointment, String> startTimeCol;
 	@FXML
 	TableColumn<Appointment, String> endTimeCol;
+	@FXML
+	TableColumn<Appointment, String> editCol;
+	@FXML
+	Button bookApptBtn;
+
+	BorderPane shellPane;
 
 	ObservableList<Appointment> tableData;
 
@@ -71,6 +80,48 @@ public class DashboardController extends BorderPane {
 		startTimeCol.setCellValueFactory(new PropertyValueFactory<>("ApptStartTime"));
 		endTimeCol.setCellValueFactory(new PropertyValueFactory<>("ApptEndTime"));
 
+		Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>> cellFactory = new Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>>() {
+			@Override
+			public TableCell<Appointment, String> call(final TableColumn<Appointment, String> param) {
+				final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
+					final Button btn = new Button("Edit");
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(event -> {
+								Appointment appointment = getTableView().getItems().get(getIndex());
+								System.out.println(appointment.getApptTitle());
+
+								BookAppointmentController editAppt;
+
+								try {
+									editAppt = new BookAppointmentController(appointment.getApptTitle(),
+											appointment.getApptProfessor(), appointment.getApptDate(),
+											appointment.getApptStartTime(), appointment.getApptEndTime());
+									editAppt.setShellBorderPane(shellPane);
+									shellPane.setCenter(editAppt);
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+
+							});
+							setGraphic(btn);
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+
+		editCol.setCellFactory(cellFactory);
+
 		populateApptTable();
 
 		apptTable.setItems(tableData);
@@ -94,11 +145,16 @@ public class DashboardController extends BorderPane {
 			String studentValue = row[5];
 			String professorValue = row[6];
 
-			apptData.add(new Appointment(idValue, titleValue, dateValue, startTimeValue, endTimeValue, studentValue, professorValue));
+			apptData.add(new Appointment(idValue, titleValue, dateValue, startTimeValue, endTimeValue, studentValue,
+					professorValue));
 
 			tableData = FXCollections.observableArrayList(apptData);
 
 		}
 	}
-	
+
+	public void setShellBorderPane(BorderPane pane) {
+		shellPane = pane;
+	}
+
 }

@@ -8,41 +8,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0"
-	prefWidth="650.0" type="BorderPane"
-	xmlns="http://javafx.com/javafx/15.0.1"
-	xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="650.0" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
 	<top>
-		<AnchorPane prefHeight="108.0" prefWidth="650.0"
-			BorderPane.alignment="CENTER">
+		<AnchorPane prefHeight="108.0" prefWidth="650.0" BorderPane.alignment="CENTER">
 			<children>
-				<Text fx:id="greetingText" layoutX="59.0" layoutY="76.0"
-					strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User">
+				<Text fx:id="greetingText" layoutX="59.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User">
 					<font>
 						<Font name="System Bold" size="16.0" />
 					</font>
 				</Text>
+            <Button fx:id="bookApptBtn" layoutX="491.0" layoutY="56.0" mnemonicParsing="false" text="Book Appointment" />
 			</children>
 		</AnchorPane>
 	</top>
 	<center>
-		<AnchorPane prefHeight="438.0" prefWidth="650.0"
-			BorderPane.alignment="CENTER">
+		<AnchorPane prefHeight="438.0" prefWidth="650.0" BorderPane.alignment="CENTER">
 			<children>
-				<TableView fx:id="apptTable" layoutX="62.0" layoutY="14.0"
-					prefHeight="369.0" prefWidth="527.0">
+				<TableView fx:id="apptTable" layoutX="46.0" layoutY="14.0" prefHeight="369.0" prefWidth="558.0">
 					<columns>
-						<TableColumn fx:id="apptCol" prefWidth="112.0"
-							text="Appointment" />
-						<TableColumn fx:id="profCol" prefWidth="98.0"
-							text="Professor" />
-						<TableColumn fx:id="dateCol" prefWidth="87.0"
-							text="Date" />
-						<TableColumn fx:id="startTimeCol" prefWidth="72.0"
-							text="Start Time" />
-						<TableColumn fx:id="endTimeCol" prefWidth="72.0"
-							text="End Time" />
+						<TableColumn fx:id="apptCol" prefWidth="112.0" text="Appointment" />
+						<TableColumn fx:id="profCol" prefWidth="98.0" text="Professor" />
+						<TableColumn fx:id="dateCol" prefWidth="87.0" text="Date" />
+						<TableColumn fx:id="startTimeCol" prefWidth="72.0" text="Start Time" />
+						<TableColumn fx:id="endTimeCol" prefWidth="72.0" text="End Time" />
+                  <TableColumn fx:id="editCol" prefWidth="116.0" text="Edit Appointment" />
 					</columns>
 				</TableView>
 			</children>

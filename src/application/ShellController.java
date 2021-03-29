@@ -6,6 +6,8 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -46,6 +48,21 @@ public class ShellController extends AnchorPane {
 		DashboardController dashboardController = new DashboardController();
 
 		System.out.println("dashboardBtnListener()");
+		
+		dashboardController.setShellBorderPane(mainPane);
+		dashboardController.bookApptBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					bookApptBtnListener();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 
 		mainPane.setCenter(dashboardController);
 	}
@@ -82,6 +99,8 @@ public class ShellController extends AnchorPane {
 		
 		BookAppointmentController bookAppt = new BookAppointmentController();
 		
+		bookAppt.setShellBorderPane(mainPane);
+
 		mainPane.setCenter(bookAppt);
 	}
 }
