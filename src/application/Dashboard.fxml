@@ -11,8 +11,8 @@
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0"
 	prefWidth="650.0" type="BorderPane"
-	xmlns="http://javafx.com/javafx/15.0.1"
-	xmlns:fx="http://javafx.com/fxml/1">
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml">
 	<top>
 		<AnchorPane prefHeight="108.0" prefWidth="650.0"
 			BorderPane.alignment="CENTER">
@@ -23,6 +23,9 @@
 						<Font name="System Bold" size="16.0" />
 					</font>
 				</Text>
+				<Button fx:id="bookApptBtn" layoutX="461.0" layoutY="56.0"
+					mnemonicParsing="false" text="Book Appointment"
+					onAction="#bookApptBtnListener" />
 			</children>
 		</AnchorPane>
 	</top>
@@ -30,8 +33,8 @@
 		<AnchorPane prefHeight="438.0" prefWidth="650.0"
 			BorderPane.alignment="CENTER">
 			<children>
-				<TableView fx:id="apptTable" layoutX="62.0" layoutY="14.0"
-					prefHeight="369.0" prefWidth="527.0">
+				<TableView fx:id="apptTable" layoutX="104.0"
+					layoutY="26.0" prefHeight="328.0" prefWidth="442.0">
 					<columns>
 						<TableColumn fx:id="apptCol" prefWidth="112.0"
 							text="Appointment" />
@@ -48,4 +51,19 @@
 			</children>
 		</AnchorPane>
 	</center>
+	<bottom>
+		<AnchorPane prefHeight="73.0" prefWidth="650.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<Text fx:id="dashboardErrorText" fill="RED" layoutX="57.0"
+					layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0"
+					wrappingWidth="282.21630859375" />
+				<Button fx:id="editApptBtn" layoutX="454.0" layoutY="10.0"
+					mnemonicParsing="false" onAction="#editApptBtnListener" text="Edit" />
+				<Button fx:id="deleteApptBtn" layoutX="520.0" layoutY="10.0"
+					mnemonicParsing="false" onAction="#deleteApptBtnListener"
+					text="Delete" />
+			</children>
+		</AnchorPane>
+	</bottom>
 </fx:root>

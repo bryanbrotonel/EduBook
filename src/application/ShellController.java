@@ -44,8 +44,8 @@ public class ShellController extends AnchorPane {
 	@FXML
 	public void dashboardBtnListener() throws SQLException {
 		DashboardController dashboardController = new DashboardController();
-
-		System.out.println("dashboardBtnListener()");
+		
+		dashboardController.setShellBorderPane(mainPane);
 
 		mainPane.setCenter(dashboardController);
 	}
@@ -54,15 +54,12 @@ public class ShellController extends AnchorPane {
 	public void settingsBtnListener() throws SQLException {
 		SettingsController settingsController = new SettingsController();
 		
-		System.out.println("settingsBtnListener()");
-		
 		mainPane.setCenter(settingsController);
 
 	}
 
 	@FXML
 	public void logOutBtnListener(MouseEvent event) throws SQLException, IOException {
-		System.out.println("logOutBtnListener()");
 
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -75,13 +72,5 @@ public class ShellController extends AnchorPane {
 		window.show();
 
 	}
-	
-	@FXML
-	public void bookApptBtnListener() throws SQLException {
-		System.out.println("bookApptBtn()");
-		
-		BookAppointmentController bookAppt = new BookAppointmentController();
-		
-		mainPane.setCenter(bookAppt);
-	}
+
 }

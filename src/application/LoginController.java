@@ -71,9 +71,6 @@ public class LoginController {
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
-//        UserSession session = UserSession.getInstance(emailTextField.getText());
-//        System.out.println(session.toString());
-        
         window.setScene(tableViewScene);
         window.show();
 	}
