@@ -95,18 +95,11 @@ public class BookAppointmentController extends AnchorPane {
 	public void initialize() throws SQLException, ParseException {
 
 		setEndOfDay();
-		configProfPicker();
-		configDatePicker();
-		configStartTimePicker();
-		configEndTimePicker();
 
-		if (apptData == null)
-			bookApptTitleText.setText("Book Appointment");
-		else {
-			bookApptTitleText.setText("Edit Appointment");
-
-			String startTime = apptData[3].substring(0, apptData[3].length() - 3);
-
+		if (apptData != null) {
+			String startTime = formatTime(apptData[3]);
+			
+			setStartTimes();
 			setEndTimes(startTime);
 
 			apptTitleTextField.setText(apptData[1]);
@@ -116,6 +109,11 @@ public class BookAppointmentController extends AnchorPane {
 			profTextField.setValue(apptData[6]);
 
 		}
+
+		configProfPicker();
+		configDatePicker();
+		configStartTimePicker();
+		configEndTimePicker();
 
 		bookApptTitleText.setText(apptData == null ? "Book Appointment" : "Edit Appointment");
 
@@ -143,9 +141,10 @@ public class BookAppointmentController extends AnchorPane {
 
 		sqlSelect = "SELECT * FROM PROFESSORS WHERE EMAIL='" + apptProf + "';";
 		resultSet = statement.executeQuery(sqlSelect);
+		
 		while (resultSet.next())
 			apptData[6] = resultSet.getString("LastName") + ", " + resultSet.getString("FirstName");
-
+		
 		apptData[1] = apptTitle;
 		apptData[2] = apptDate;
 		apptData[3] = apptStartTime;
@@ -232,6 +231,34 @@ public class BookAppointmentController extends AnchorPane {
 
 	}
 
+	public void setProfAvailability(String date, String profEmail) throws SQLException {
+		LocalDate dateValue = LocalDate.parse(date);
+		String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE PROFESSOR='" + profEmail + "' AND DATE='"
+				+ dateValue.format(DateTimeFormatter.ISO_LOCAL_DATE) + "';";
+
+		profSchedule = new ArrayList<String>();
+		ResultSet resultSet = statement.executeQuery(sqlSelect);
+
+		while (resultSet.next()) {
+
+			String startTime = resultSet.getString("STARTTIME");
+			String endTime = resultSet.getString("ENDTIME");
+
+			Calendar startTimeCal = parseTime(startTime);
+			Calendar endTimeCal = parseTime(endTime);
+
+			while (getCalendarSeconds(startTimeCal) < getCalendarSeconds(endTimeCal)) {
+
+				String timeValue = formatTime(startTimeCal);
+
+				if (!profSchedule.contains(timeValue))
+					profSchedule.add(timeValue);
+
+				startTimeCal.add(Calendar.MINUTE, 30);
+			}
+		}
+	}
+
 	public void configStartTimePicker() throws ParseException, SQLException {
 
 		profTextField.valueProperty().addListener(new ChangeListener<String>() {
@@ -266,7 +293,14 @@ public class BookAppointmentController extends AnchorPane {
 
 	public void setStartTimes() throws SQLException {
 
-		if (profTextField.getValue() != null && apptDatePicker.getValue() != null) {
+		if ((profTextField.getValue() != null && apptDatePicker.getValue() != null) || apptData != null) {
+
+			String apptDate = apptData != null ? apptData[2] : apptDatePicker.getValue().toString();
+			String apptProf = apptData != null ? getProfEmail(apptData[6]) : getProfEmail(profTextField.getValue());
+			
+			setProfAvailability(apptDate, apptProf);
+			if (apptData != null)
+				profSchedule.remove(formatTime(apptData[3]));
 
 			apptStartTimePicker.getItems().clear();
 
@@ -274,32 +308,6 @@ public class BookAppointmentController extends AnchorPane {
 			cal.set(Calendar.HOUR_OF_DAY, 9);
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 0);
-
-			LocalDate dateValue = apptDatePicker.getValue();
-			String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE PROFESSOR='" + getProfEmail(profTextField.getValue())
-					+ "' AND DATE='" + dateValue.format(DateTimeFormatter.ISO_LOCAL_DATE) + "';";
-
-			profSchedule = new ArrayList<String>();
-			ResultSet resultSet = statement.executeQuery(sqlSelect);
-
-			while (resultSet.next()) {
-
-				String startTime = resultSet.getString("STARTTIME");
-				String endTime = resultSet.getString("ENDTIME");
-
-				Calendar startTimeCal = parseTime(startTime);
-				Calendar endTimeCal = parseTime(endTime);
-
-				while (getCalendarSeconds(startTimeCal) < getCalendarSeconds(endTimeCal)) {
-
-					String timeValue = formatTime(startTimeCal);
-
-					if (!profSchedule.contains(timeValue))
-						profSchedule.add(timeValue);
-
-					startTimeCal.add(Calendar.MINUTE, 30);
-				}
-			}
 
 			while (getCalendarSeconds(cal) < getCalendarSeconds(endOfDay)) {
 				String timeValue = formatTime(cal);
@@ -391,6 +399,10 @@ public class BookAppointmentController extends AnchorPane {
 		DateFormat df = new SimpleDateFormat("HH:mm");
 
 		return df.format(cal.getTime());
+	}
+	
+	public String formatTime(String time) {
+		return time.substring(0, apptData[3].length() - 3);
 	}
 
 	public int getCalendarSeconds(Calendar cal) {
