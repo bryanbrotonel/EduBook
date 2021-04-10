@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public final class UserSession {
 		this.email = email;
 		this.password = password;
 	}
-	
+
 	public static UserSession getInstance() {
 		return instance;
 	}
@@ -69,6 +70,7 @@ public final class UserSession {
 	}
 
 	public List<String[]> getAppt(String email) throws SQLException {
+		
 		ArrayList<String[]> appointments = new ArrayList<String[]>();
 
 		ConnectionClass connectionClass = new ConnectionClass();
@@ -77,7 +79,7 @@ public final class UserSession {
 
 		statement = connection.createStatement();
 
-		String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE Student='" + email + "';";
+		String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE Student='" + email + "' AND Date >= CURDATE();";
 
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 		ResultSetMetaData resultSetMD = resultSet.getMetaData();
