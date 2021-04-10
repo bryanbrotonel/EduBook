@@ -84,6 +84,8 @@ public class BookAppointmentController extends AnchorPane {
 		setApptData(appt.getApptTitle(), appt.getApptProfessor(), appt.getApptDate(), appt.getApptStartTime(),
 				appt.getApptEndTime());
 
+		setProfAvailability();
+
 		try {
 			fxmlLoader.load();
 		} catch (IOException e) {
@@ -98,7 +100,7 @@ public class BookAppointmentController extends AnchorPane {
 
 		if (apptData != null) {
 			String startTime = formatTime(apptData[3]);
-			
+
 			setStartTimes();
 			setEndTimes(startTime);
 
@@ -141,10 +143,10 @@ public class BookAppointmentController extends AnchorPane {
 
 		sqlSelect = "SELECT * FROM PROFESSORS WHERE EMAIL='" + apptProf + "';";
 		resultSet = statement.executeQuery(sqlSelect);
-		
+
 		while (resultSet.next())
 			apptData[6] = resultSet.getString("LastName") + ", " + resultSet.getString("FirstName");
-		
+
 		apptData[1] = apptTitle;
 		apptData[2] = apptDate;
 		apptData[3] = apptStartTime;
@@ -218,8 +220,6 @@ public class BookAppointmentController extends AnchorPane {
 
 	public void configProfPicker() throws SQLException {
 
-		profSchedule = null;
-
 		statement = connection.createStatement();
 
 		String sqlSelect = "SELECT * FROM PROFESSORS";
@@ -231,7 +231,11 @@ public class BookAppointmentController extends AnchorPane {
 
 	}
 
-	public void setProfAvailability(String date, String profEmail) throws SQLException {
+	public void setProfAvailability() throws SQLException {
+
+		String date = apptData != null ? apptData[2] : apptDatePicker.getValue().toString();
+		String profEmail = apptData != null ? getProfEmail(apptData[6]) : getProfEmail(profTextField.getValue());
+
 		LocalDate dateValue = LocalDate.parse(date);
 		String sqlSelect = "SELECT * FROM APPOINTMENTS WHERE PROFESSOR='" + profEmail + "' AND DATE='"
 				+ dateValue.format(DateTimeFormatter.ISO_LOCAL_DATE) + "';";
@@ -255,6 +259,19 @@ public class BookAppointmentController extends AnchorPane {
 					profSchedule.add(timeValue);
 
 				startTimeCal.add(Calendar.MINUTE, 30);
+			}
+		}
+
+		if (apptData != null) {
+			Calendar startTime = parseTime(apptData[3]);
+			Calendar endTime = parseTime(apptData[4]);
+			
+			while (getCalendarSeconds(endTime) >= getCalendarSeconds(startTime)) {
+				String timeValue = formatTime(endTime);
+				
+				profSchedule.remove(timeValue);
+
+				endTime.add(Calendar.MINUTE, -30);
 			}
 		}
 	}
@@ -295,12 +312,7 @@ public class BookAppointmentController extends AnchorPane {
 
 		if ((profTextField.getValue() != null && apptDatePicker.getValue() != null) || apptData != null) {
 
-			String apptDate = apptData != null ? apptData[2] : apptDatePicker.getValue().toString();
-			String apptProf = apptData != null ? getProfEmail(apptData[6]) : getProfEmail(profTextField.getValue());
-			
-			setProfAvailability(apptDate, apptProf);
-			if (apptData != null)
-				profSchedule.remove(formatTime(apptData[3]));
+			setProfAvailability();
 
 			apptStartTimePicker.getItems().clear();
 
@@ -400,7 +412,7 @@ public class BookAppointmentController extends AnchorPane {
 
 		return df.format(cal.getTime());
 	}
-	
+
 	public String formatTime(String time) {
 		return time.substring(0, apptData[3].length() - 3);
 	}
