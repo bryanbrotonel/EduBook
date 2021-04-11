@@ -4,40 +4,76 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="437.0" prefWidth="493.0"
-	xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml"
+<AnchorPane prefHeight="560" prefWidth="850"
+	xmlns="http://javafx.com/javafx/15.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.RegisterController">
 	<children>
-		<TextField fx:id="regFirstNameTextField" layoutX="71.0"
-			layoutY="113.0" promptText="First Name" />
-		<TextField fx:id="regLastNameTextField" layoutX="263.0"
-			layoutY="113.0" promptText="Last Name" />
-		<TextField fx:id="regEmailTextField" layoutX="167.0"
-			layoutY="167.0" promptText="Email" />
-		<TextField fx:id="regPasswordTextField" layoutX="167.0"
-			layoutY="212.0" promptText="Password" />
-		<TextField fx:id="regConfirmPasswordTextField"
-			layoutX="166.0" layoutY="264.0" promptText="Confirm Password" />
-		<Button fx:id="registerUserBtn" layoutX="215.0" layoutY="328.0"
-			mnemonicParsing="false" onAction="#registerBtnListener"
-			text="Register" />
-		<Label fx:id="logInLink" alignment="CENTER" layoutX="144.0"
-			layoutY="379.0" onMouseClicked="#logInLinkListener" prefHeight="17.0"
-			prefWidth="206.0" text="Already have an account? Log In"
-			textAlignment="CENTER" />
-		<Label alignment="CENTER" contentDisplay="CENTER"
-			layoutX="144.0" layoutY="49.0" prefHeight="17.0" prefWidth="206.0"
-			text="Register" textAlignment="CENTER">
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb600"
+			height="560.0" layoutY="-2.0" stroke="TRANSPARENT"
+			strokeType="INSIDE" width="425.0" />
+		<Label alignment="CENTER" layoutX="55.0" layoutY="218.0"
+			prefHeight="76.0" prefWidth="123.0" text="Edu" textFill="WHITE">
 			<font>
-				<Font size="18.0" />
+				<Font name="Raleway Bold" size="64.0" />
+			</font>
+		</Label>
+		<Label alignment="CENTER" layoutX="178.0" layoutY="218.0"
+			prefHeight="76.0" prefWidth="159.0" text="Book" textFill="#434343">
+			<font>
+				<Font name="Raleway Bold" size="64.0" />
+			</font>
+		</Label>
+		<Label layoutX="55.0" layoutY="291.0" prefHeight="29.0"
+			prefWidth="335.0"
+			text="For Student and Professor Appointment Bookings"
+			textFill="WHITE">
+			<font>
+				<Font name="Raleway Bold" size="14.0" />
+			</font>
+		</Label>
+		<Label layoutX="492.0" layoutY="85.0" prefHeight="29.0"
+			prefWidth="98.0" text="Register" textFill="#434343">
+			<font>
+				<Font name="Raleway Bold" size="24.0" />
+			</font>
+		</Label>
+		<TextField fx:id="regFirstNameTextField" layoutX="494.0"
+			layoutY="134.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="First Name" />
+		<TextField fx:id="regLastNameTextField" layoutX="493.0"
+			layoutY="176.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="Last Name" />
+		<TextField fx:id="regEmailTextField" layoutX="493.0"
+			layoutY="227.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="Email" />
+		<TextField fx:id="regPasswordTextField" layoutX="494.0"
+			layoutY="330.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="Password" />
+		<TextField fx:id="regConfirmPasswordTextField"
+			layoutX="493.0" layoutY="278.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="Confirm Password" />
+		<Button fx:id="registerUserBtn" layoutX="494.0" layoutY="382.0"
+			mnemonicParsing="false" onAction="#registerBtnListener"
+			prefHeight="27.0" prefWidth="289.0" text="Register" />
+		<Label fx:id="logInLink" alignment="CENTER" layoutX="535.0"
+			layoutY="431.0" onMouseClicked="#logInLinkListener" prefHeight="17.0"
+			prefWidth="206.0" text="Already have an account? Log In"
+			textAlignment="CENTER" textFill="#434343">
+			<font>
+				<Font name="Raleway Bold" size="13.0" />
 			</font>
 		</Label>
 		<Label fx:id="regErrorLabel" alignment="CENTER"
-			contentDisplay="CENTER" layoutX="167.0" layoutY="82.0"
+			contentDisplay="CENTER" layoutX="557.0" layoutY="459.0"
 			prefHeight="17.0" prefWidth="161.0" textAlignment="CENTER"
-			textFill="RED" />
+			textFill="RED">
+			<font>
+				<Font name="Raleway Regular" size="13.0" />
+			</font>
+		</Label>
 	</children>
 </AnchorPane>

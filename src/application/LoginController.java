@@ -27,8 +27,8 @@ public class LoginController {
 	@FXML TextField passwordTextField;
 	@FXML Button selectBtn;
 	@FXML Button insertBtn;
+	@FXML Button registerBtn;
 	@FXML Label textLabel;
-	@FXML Text registerBtn;
 	
 	ConnectionClass connectionClass = new ConnectionClass();
 	Connection connection = connectionClass.getConnection();
@@ -55,7 +55,7 @@ public class LoginController {
 		
 	}
 
-	@FXML public void registerBtnListener(MouseEvent event) throws IOException {
+	@FXML public void registerBtnListener(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("Register.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
