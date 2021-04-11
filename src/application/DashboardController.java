@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import connectivity.ConnectionClass;
@@ -47,6 +49,8 @@ public class DashboardController extends BorderPane {
 	Button bookApptBtn;
 	@FXML
 	Text dashboardErrorText;
+	@FXML
+	Text apptTodayText;
 
 	BorderPane shellPane;
 
@@ -76,13 +80,27 @@ public class DashboardController extends BorderPane {
 		greetingText.setText("Hello, " + currSession.getFirstName());
 
 		setUpTable();
+		setTodayText();
 
 	}
-	
+
+	private void setTodayText() {
+		int todayAppts = 0;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyy-MM-dd");
+		Date date = new Date();
+
+		for (Appointment a : apptData)
+			if (a.getApptDate().equalsIgnoreCase(formatter.format(date)))
+				todayAppts++;
+
+		apptTodayText.setText("You have " + todayAppts + " appointments today.");
+
+	}
+
 	public void bookApptBtnListener() throws SQLException {
-		
+
 		BookAppointmentController bookAppt = new BookAppointmentController();
-				
+
 		bookAppt.setShellBorderPane(shellPane);
 
 		shellPane.setCenter(bookAppt);
@@ -105,6 +123,8 @@ public class DashboardController extends BorderPane {
 		});
 
 		populateApptTable();
+
+		apptTable.getSortOrder().add(dateCol);
 
 	}
 

@@ -11,21 +11,30 @@
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0"
 	prefWidth="650.0" type="BorderPane"
-	xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml">
+	xmlns="http://javafx.com/javafx/15.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
 	<top>
 		<AnchorPane prefHeight="108.0" prefWidth="650.0"
 			BorderPane.alignment="CENTER">
 			<children>
-				<Text fx:id="greetingText" layoutX="59.0" layoutY="76.0"
-					strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User">
+				<Text fx:id="greetingText" fill="#434343" layoutX="50.0"
+					layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0"
+					text="Hello, User">
 					<font>
-						<Font name="System Bold" size="16.0" />
+						<Font name="Raleway Bold" size="30.0" />
 					</font>
 				</Text>
-				<Button fx:id="bookApptBtn" layoutX="461.0" layoutY="56.0"
-					mnemonicParsing="false" text="Book Appointment"
-					onAction="#bookApptBtnListener" />
+				<Button fx:id="bookApptBtn" layoutX="464.0" layoutY="74.0"
+					mnemonicParsing="false" onAction="#bookApptBtnListener"
+					prefHeight="27.0" prefWidth="136.0" text="Book Appointment" />
+				<Text fx:id="apptTodayText" fill="#949494" layoutX="50.0"
+					layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0"
+					text="You have 0 appointments today"
+					wrappingWidth="218.21630859375">
+					<font>
+						<Font name="System Bold" size="14.0" />
+					</font>
+				</Text>
 			</children>
 		</AnchorPane>
 	</top>
@@ -33,18 +42,18 @@
 		<AnchorPane prefHeight="438.0" prefWidth="650.0"
 			BorderPane.alignment="CENTER">
 			<children>
-				<TableView fx:id="apptTable" layoutX="104.0"
-					layoutY="26.0" prefHeight="328.0" prefWidth="442.0">
+				<TableView fx:id="apptTable" layoutX="53.0" layoutY="37.0"
+					prefHeight="328.0" prefWidth="544.0">
 					<columns>
-						<TableColumn fx:id="apptCol" prefWidth="112.0"
+						<TableColumn fx:id="apptCol" prefWidth="158.0"
 							text="Appointment" />
-						<TableColumn fx:id="profCol" prefWidth="98.0"
+						<TableColumn fx:id="profCol" prefWidth="111.0"
 							text="Professor" />
-						<TableColumn fx:id="dateCol" prefWidth="87.0"
+						<TableColumn fx:id="dateCol" prefWidth="85.0"
 							text="Date" />
-						<TableColumn fx:id="startTimeCol" prefWidth="72.0"
+						<TableColumn fx:id="startTimeCol" prefWidth="91.0"
 							text="Start Time" />
-						<TableColumn fx:id="endTimeCol" prefWidth="72.0"
+						<TableColumn fx:id="endTimeCol" prefWidth="98.0"
 							text="End Time" />
 					</columns>
 				</TableView>
@@ -58,11 +67,12 @@
 				<Text fx:id="dashboardErrorText" fill="RED" layoutX="57.0"
 					layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0"
 					wrappingWidth="282.21630859375" />
-				<Button fx:id="editApptBtn" layoutX="454.0" layoutY="10.0"
-					mnemonicParsing="false" onAction="#editApptBtnListener" text="Edit" />
-				<Button fx:id="deleteApptBtn" layoutX="520.0" layoutY="10.0"
+				<Button fx:id="editApptBtn" layoutX="455.0" layoutY="17.0"
+					mnemonicParsing="false" onAction="#editApptBtnListener"
+					prefHeight="27.0" prefWidth="56.0" text="Edit" />
+				<Button fx:id="deleteApptBtn" layoutX="540.0" layoutY="17.0"
 					mnemonicParsing="false" onAction="#deleteApptBtnListener"
-					text="Delete" />
+					prefHeight="27.0" prefWidth="56.0" text="Delete" />
 			</children>
 		</AnchorPane>
 	</bottom>
