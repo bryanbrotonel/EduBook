@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.UserSession;
@@ -37,7 +38,7 @@ public class ShellController extends AnchorPane {
 
 	@FXML
 	void initialize() throws SQLException {
-
+		Font.loadFont(getClass().getResourceAsStream("/resources/fonts/Raleway-Bold.ttf"), 14);
 		dashboardBtnListener();
 	}
 

@@ -21,6 +21,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import models.Appointment;
 import models.UserSession;
@@ -78,7 +79,7 @@ public class DashboardController extends BorderPane {
 	@FXML
 	public void initialize() throws SQLException {
 		greetingText.setText("Hello, " + currSession.getFirstName());
-
+		
 		setUpTable();
 		setTodayText();
 
