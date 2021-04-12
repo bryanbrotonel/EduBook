@@ -41,6 +41,9 @@ public class LoginController {
 
 	@FXML
 	public void loginBtnListener(ActionEvent event) throws SQLException, IOException {
+		
+		emailTextField.setStyle("-fx-border-color: #CED4DA; -fx-focus-color: #CED4DA;");
+		passwordTextField.setStyle("-fx-border-color: #CED4DA; -fx-focus-color: #CED4DA;");
 
 		statement = connection.createStatement();
 
@@ -54,10 +57,13 @@ public class LoginController {
 				passwordTextField.setStyle("-fx-border-color: #D64045; -fx-focus-color: #D64045;");
 		} else {
 			do {
-				if (!passwordTextField.getText().equals(resultSet.getObject("Password"))) {
-					emailTextField.setStyle("-fx-border-color: #CED4DA; -fx-focus-color: #CED4DA;");
+				if (!emailTextField.getText().equals(resultSet.getObject("Email")))
+					emailTextField.setStyle("-fx-border-color: #D64045; -fx-focus-color: #D64045;");
+
+				else if (!passwordTextField.getText().equals(resultSet.getObject("Password")))
 					passwordTextField.setStyle("-fx-border-color: #D64045; -fx-focus-color: #D64045;");
-				} else {
+
+				else {
 					UserSession.getInstance(emailTextField.getText());
 					redirectLogIn(event);
 				}

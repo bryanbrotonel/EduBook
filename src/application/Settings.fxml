@@ -13,14 +13,14 @@
 	xmlns="http://javafx.com/javafx"
 	xmlns:fx="http://javafx.com/fxml">
 	<children>
-		<Text id="PrimaryText" fx:id="bookApptTitleText" fill="#434343"
+		<Text id="PrimaryFont" fx:id="bookApptTitleText" fill="#434343"
 			layoutX="50.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0"
 			text="Settings" wrappingWidth="318.21630859375">
 			<font>
 				<Font name="Raleway Bold" size="30.0" />
 			</font>
 		</Text>
-		<Text id="SecondaryText" fx:id="settingsFirstNameText"
+		<Text fx:id="settingsFirstNameText"
 			layoutX="50.0" layoutY="141.0" text="First Name">
 			<font>
 				<Font size="17.0" />
@@ -28,7 +28,7 @@
 		</Text>
 		<TextField fx:id="settingsFirstNameTextField" layoutX="50.0"
 			layoutY="151.0" promptText="First Name" />
-		<Text id="SecondaryText" fx:id="settingsLastNameText"
+		<Text fx:id="settingsLastNameText"
 			layoutX="256.0" layoutY="141.0" text="Last Name">
 			<font>
 				<Font size="17.0" />
@@ -36,7 +36,7 @@
 		</Text>
 		<TextField fx:id="settingsLastNameTextField" layoutX="256.0"
 			layoutY="151.0" promptText="Last Name" />
-		<Text id="SecondaryText" fx:id="settingsEmailNameText"
+		<Text fx:id="settingsEmailNameText"
 			layoutX="50.0" layoutY="221.0" text="Email Address">
 			<font>
 				<Font size="17.0" />
@@ -44,13 +44,13 @@
 		</Text>
 		<TextField fx:id="settingsEmailTextField" layoutX="50.0"
 			layoutY="231.0" promptText="Email Address" />
-		<Text id="SecondaryText" fx:id="settingsEmailNameText"
+		<Text fx:id="settingsEmailNameText"
 			layoutX="50.0" layoutY="296.0" text="Old Password">
 			<font>
 				<Font size="17.0" />
 			</font>
 		</Text>
-		<Text id="SecondaryText" fx:id="settingsEmailNameText"
+		<Text fx:id="settingsEmailNameText"
 			layoutX="50.0" layoutY="368.0" text="New Password">
 			<font>
 				<Font size="17.0" />
@@ -58,7 +58,7 @@
 		</Text>
 		<TextField fx:id="settingsNewPasswordTextField"
 			layoutX="50.0" layoutY="378.0" promptText="New Password" />
-		<Text id="SecondaryText" fx:id="settingsEmailNameText"
+		<Text fx:id="settingsEmailNameText"
 			layoutX="256.0" layoutY="368.0" text="Confirm Password">
 			<font>
 				<Font size="17.0" />
@@ -75,10 +75,10 @@
 				<Font size="17.0" />
 			</font>
 		</Button>
-		<Label fx:id="settingsErrorLabel" alignment="CENTER"
-			contentDisplay="CENTER" layoutX="200.0" layoutY="518.0"
-			prefHeight="17.0" prefWidth="161.0" textAlignment="CENTER"
-			textFill="RED" />
+		<Label id="SecondaryText" fx:id="settingsErrorLabel"
+			alignment="CENTER" contentDisplay="CENTER" layoutX="50.0"
+			layoutY="430.0" prefHeight="17.0" prefWidth="161.0"
+			textAlignment="CENTER" textFill="RED" />
 		<PasswordField fx:id="settingsOldPasswordTextField"
 			layoutX="50.0" layoutY="311.0" promptText="Old Password" />
 
