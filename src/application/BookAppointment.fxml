@@ -39,7 +39,7 @@
 			</font>
 		</Text>
 		<ChoiceBox fx:id="apptStartTimePicker" layoutX="48.0" layoutY="369.0" prefHeight="27.0" prefWidth="181.0" />
-		<Button id="SuccessButton" fx:id="scheduleApptBtn" layoutX="250.0" layoutY="457.0" mnemonicParsing="false" onAction="#scheduleApptBtnListener" prefHeight="42.0" prefWidth="150.0" text="Book Appointment">
+		<Button id="SuccessButton" fx:id="scheduleApptBtn" layoutX="251.0" layoutY="457.0" mnemonicParsing="false" onAction="#scheduleApptBtnListener" prefHeight="42.0" prefWidth="187.0" text="Book Appointment">
          <font>
             <Font size="16.0" />
          </font></Button>
