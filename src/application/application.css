@@ -1,30 +1,32 @@
 @font-face {
-    font-family: Raleway-Regular;
-    src: url('file:resources/fonts/Raleway-Regular.ttf');
+	font-family: Raleway-Regular;
+	src: url('file:resources/fonts/Raleway-Regular.ttf');
 }
 
 @font-face {
-    font-family: Raleway-Bold;
-    src: url('file:resources/fonts/Raleway-Bold.ttf');
+	font-family: Raleway-Bold;
+	src: url('file:resources/fonts/Raleway-Bold.ttf');
 }
 
-.text-field, .choice-box {
+.text-field,
+.choice-box {
 	-fx-border-radius: 5.0;
 	-fx-border-width: 2.0;
 	-fx-background-color: white;
 	-fx-border-color: #CED4DA;
 }
 
+
 /*
  * BUTTONS
  */
- 
- .button {
- 	-fx-font-family: Raleway;
+
+.button {
+	-fx-font-family: Raleway;
 	-fx-font-weight: Bold;
 	-fx-text-fill: white;
-    -fx-border-radius: 5.0;
- }
+	-fx-border-radius: 5.0;
+}
 
 #PrimaryFont {
 	-fx-font-family: Raleway;
@@ -36,123 +38,140 @@
 }
 
 #PrimaryButton {
-    -fx-background-color: #ffb600;
-
+	-fx-background-color: #ffb600;
 }
 
-#SecondaryButton 
-{
-
-    -fx-background-color: white;
-    -fx-border-color: #ffb600;
-    -fx-text-fill: #434343;
-    -fx-border-width: 2.0;
+#SecondaryButton {
+	-fx-background-color: white;
+	-fx-border-color: #ffb600;
+	-fx-text-fill: #434343;
+	-fx-border-width: 2.0;
 }
 
 #EditButton {
-    -fx-background-color: #949494;
+	-fx-background-color: #949494;
 }
 
 #SuccessButton {
-    -fx-background-color: #49A078;
+	-fx-background-color: #49A078;
 }
 
 #DangerButton {
-    -fx-background-color: #D64045;
+	-fx-background-color: #D64045;
 }
+
 
 /*
  * TABLE VIEW
  */
 
-.table-view{
-   -fx-background-color: transparent;
+.table-view {
+	-fx-background-color: transparent;
+	-fx-border-color: #cfcfcf;
+	-fx-border-radius: 5.0;
+	-fx-border-width: 2.0;
 }
 
-.table-view:focused{
-    -fx-background-color: transparent;
+.table-view:focused {
+	-fx-background-color: transparent;
 }
 
-.table-view .table-cell{
-    -fx-text-fill: #434343;
+.table-view .table-cell {
+	-fx-text-fill: #434343;
 }
 
 .table-view .column-header {
-    -fx-background-color: transparent;
-    -fx-font-weight: Bold;
+	-fx-background-color: #cfcfcf;
+	-fx-font-weight: Bold;
+	-fx-border-radius: 5.0;
+	-fx-border-width: 2.0;
 }
 
-.table-view .column-header-background .label{
-    -fx-background-color: transparent;
-    -fx-font-weight: Bold;
+.table-view .column-header-background .label {
+	-fx-background-color: transparent;
+	-fx-font-weight: Bold;
 }
 
 .table-view .column-header:selected {
-    -fx-background-color: transparent;
+	-fx-background-color: transparent;
 }
 
-.table-view .column-header-background{
-    -fx-background-color: #cfcfcf;
+.table-view .column-header-background {
+	-fx-background-color: #cfcfcf;
 }
 
-.table-row-cell{
-    -fx-background-color: -fx-table-cell-border-color, #f6f6f6;
-    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.0em; /* 0 */
+.table-row-cell {
+	-fx-background-color: -fx-table-cell-border-color, #f6f6f6;
+	-fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+	-fx-padding: 0.0em;
+	/* 0 */
 }
 
-.table-row-cell:odd{
-    -fx-background-color: -fx-table-cell-border-color, #e2e2e2;
-    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.0em; /* 0 */  
+.table-row-cell:odd {
+	-fx-background-color: -fx-table-cell-border-color, #e2e2e2;
+	-fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+	-fx-padding: 0.0em;
+	/* 0 */
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #c5c5c5;
-    -fx-background-insets: 0.0;
-    -fx-background-radius: 1.0;
+	-fx-background-color: #c5c5c5;
+	-fx-background-insets: 0.0;
+	-fx-background-radius: 1.0;
 }
 
-.table-view > .virtual-flow > .scroll-bar:vertical,
-.table-view > .virtual-flow > .scroll-bar:vertical > .track,
-.table-view > .virtual-flow > .scroll-bar:vertical > .track-background, 
-.table-view > .virtual-flow > .scroll-bar:horizontal,
-.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
-.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
-    -fx-background-color: transparent;
-    -fx-opacity: 0.0;
+.table-view>.virtual-flow>.scroll-bar:vertical,
+.table-view>.virtual-flow>.scroll-bar:vertical>.track,
+.table-view>.virtual-flow>.scroll-bar:vertical>.track-background,
+.table-view>.virtual-flow>.scroll-bar:horizontal,
+.table-view>.virtual-flow>.scroll-bar:horizontal>.track,
+.table-view>.virtual-flow>.scroll-bar:horizontal>.track-background {
+	-fx-background-color: transparent;
+	-fx-opacity: 0.0;
 }
 
-.table-view > .virtual-flow > .scroll-bar > .increment-button, 
-.table-view > .virtual-flow > .scroll-bar > .decrement-button {
-    -fx-opacity: 0.0;
+.table-view>.virtual-flow>.scroll-bar>.increment-button,
+.table-view>.virtual-flow>.scroll-bar>.decrement-button {
+	-fx-opacity: 0.0;
 }
 
 
 /*
  * CHOICEBOX
  */
- 
-.choice-box .context-menu { -fx-background-color: white; }
-.choice-box .menu-item:focused { -fx-background-color: #ffb600; }
-.choice-box .menu-item > .label { -fx-text-fill: black; }
-.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
+
+.choice-box .context-menu {
+	-fx-background-color: white;
+}
+
+.choice-box .menu-item:focused {
+	-fx-background-color: #ffb600;
+}
+
+.choice-box .menu-item>.label {
+	-fx-text-fill: black;
+}
+
+.choice-box .menu-item:focused>.label {
+	-fx-text-fill: black;
+}
+
 
 /*
  * DATEPICKER
  */
- 
- .date-picker {
- 	-fx-background-color: transparent;
- 
- }
- .date-picker > .arrow-button {
+
+.date-picker {
+	-fx-background-color: transparent;
+}
+
+.date-picker>.arrow-button {
 	-fx-border-radius: 5.0;
 	-fx-border-width: 2.0;
 	-fx-background-color: white;
 	-fx-border-color: #CED4DA;
 }
 
-.date-picker > .arrow-button > .arrow {
-    -fx-background-color: #434343;
+.date-picker>.arrow-button>.arrow {
+	-fx-background-color: #434343;
 }

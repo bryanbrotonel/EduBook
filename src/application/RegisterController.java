@@ -21,7 +21,7 @@ import connectivity.ConnectionClass;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
-
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import models.UserSession;
 import javafx.scene.input.MouseEvent;
@@ -32,11 +32,11 @@ public class RegisterController {
 	@FXML
 	private TextField regLastNameTextField;
 	@FXML
-	private TextField regPasswordTextField;
-	@FXML
-	private TextField regConfirmPasswordTextField;
-	@FXML
 	private TextField regEmailTextField;
+	@FXML
+	private PasswordField regPasswordTextField;
+	@FXML
+	private PasswordField regConfirmPasswordTextField;
 	@FXML
 	private Button registerUserBtn;
 	@FXML

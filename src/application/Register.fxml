@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -9,35 +10,35 @@
 
 <AnchorPane prefHeight="560" prefWidth="850"
 	style="-fx-background-color: WHITE;" stylesheets="@application.css"
-	xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml"
+	xmlns="http://javafx.com/javafx/15.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.RegisterController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb600"
 			height="560.0" stroke="TRANSPARENT" strokeType="INSIDE" width="425.0" />
 		<Label layoutX="492.0" layoutY="85.0" prefHeight="29.0"
-			prefWidth="98.0" text="Register" textFill="#434343">
+			prefWidth="289.0" text="Register" textFill="#434343">
 			<font>
 				<Font name="Raleway Bold" size="24.0" />
 			</font>
 		</Label>
-		<TextField fx:id="regFirstNameTextField" layoutX="494.0"
+		<TextField fx:id="regFirstNameTextField" layoutX="492.0"
 			layoutY="134.0" prefHeight="27.0" prefWidth="289.0"
 			promptText="First Name" />
-		<TextField fx:id="regLastNameTextField" layoutX="493.0"
-			layoutY="177.0" prefHeight="27.0" prefWidth="289.0"
+		<TextField fx:id="regLastNameTextField" layoutX="492.0"
+			layoutY="182.0" prefHeight="27.0" prefWidth="289.0"
 			promptText="Last Name" />
-		<TextField fx:id="regEmailTextField" layoutX="493.0"
+		<TextField fx:id="regEmailTextField" layoutX="492.0"
 			layoutY="227.0" prefHeight="27.0" prefWidth="289.0"
 			promptText="Email" />
-		<TextField fx:id="regPasswordTextField" layoutX="494.0"
-			layoutY="330.0" prefHeight="27.0" prefWidth="289.0"
+		<PasswordField fx:id="regPasswordTextField"
+			layoutX="492.0" layoutY="270.0" prefHeight="27.0" prefWidth="289.0"
 			promptText="Password" />
-		<TextField fx:id="regConfirmPasswordTextField"
-			layoutX="493.0" layoutY="278.0" prefHeight="27.0" prefWidth="289.0"
+		<PasswordField fx:id="regConfirmPasswordTextField"
+			layoutX="492.0" layoutY="317.0" prefHeight="27.0" prefWidth="289.0"
 			promptText="Confirm Password" />
 		<Button id="PrimaryButton" fx:id="registerUserBtn"
-			layoutX="494.0" layoutY="382.0" mnemonicParsing="false"
+			layoutX="492.0" layoutY="382.0" mnemonicParsing="false"
 			onAction="#registerBtnListener" prefHeight="27.0" prefWidth="289.0"
 			text="Register" />
 		<Label fx:id="logInLink" alignment="CENTER" layoutX="535.0"

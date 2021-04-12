@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -121,6 +122,8 @@ public class DashboardController extends BorderPane {
 			});
 			return row;
 		});
+		
+		apptTable.setPlaceholder(new Label("No appointments scheduled."));
 
 		populateApptTable();
 

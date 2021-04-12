@@ -10,8 +10,8 @@
 
 <fx:root prefHeight="560.0" prefWidth="650.0"
 	style="-fx-background-color: WHITE;" stylesheets="@application.css"
-	type="AnchorPane" xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml">
+	type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<Text fx:id="bookApptTitleText" fill="#434343" layoutX="50.0"
 			layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0"
@@ -20,13 +20,13 @@
 				<Font name="Raleway Bold" size="30.0" />
 			</font>
 		</Text>
-		<Text fill="#434343" layoutX="48.0" layoutY="137.0"
+		<Text fill="#434343" layoutX="50.0" layoutY="137.0"
 			strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
 			<font>
 				<Font size="17.0" />
 			</font>
 		</Text>
-		<TextField fx:id="apptTitleTextField" layoutX="48.0"
+		<TextField fx:id="apptTitleTextField" layoutX="50.0"
 			layoutY="154.0" prefHeight="27.0" prefWidth="181.0" />
 		<Text fill="#434343" layoutX="50.0" layoutY="211.0"
 			strokeType="OUTSIDE" strokeWidth="0.0" text="Professor">
@@ -34,25 +34,25 @@
 				<Font size="17.0" />
 			</font>
 		</Text>
-		<ChoiceBox fx:id="profTextField" layoutX="48.0"
+		<ChoiceBox fx:id="profTextField" layoutX="50.0"
 			layoutY="222.0" prefHeight="27.0" prefWidth="181.0" />
-		<Text fill="#434343" layoutX="45.0" layoutY="286.0"
+		<Text fill="#434343" layoutX="50.0" layoutY="286.0"
 			strokeType="OUTSIDE" strokeWidth="0.0" text="Date"
 			wrappingWidth="187.025390625">
 			<font>
 				<Font size="17.0" />
 			</font>
 		</Text>
-		<DatePicker fx:id="apptDatePicker" layoutX="48.0"
+		<DatePicker fx:id="apptDatePicker" layoutX="50.0"
 			layoutY="299.0" prefHeight="27.0" prefWidth="181.0" />
-		<Text fill="#434343" layoutX="48.0" layoutY="358.0"
+		<Text fill="#434343" layoutX="50.0" layoutY="358.0"
 			strokeType="OUTSIDE" strokeWidth="0.0" text="Start Time"
 			wrappingWidth="181.0">
 			<font>
 				<Font size="17.0" />
 			</font>
 		</Text>
-		<ChoiceBox fx:id="apptStartTimePicker" layoutX="48.0"
+		<ChoiceBox fx:id="apptStartTimePicker" layoutX="50.0"
 			layoutY="369.0" prefHeight="27.0" prefWidth="181.0" />
 		<Button id="SuccessButton" fx:id="scheduleApptBtn"
 			layoutX="251.0" layoutY="457.0" mnemonicParsing="false"
@@ -62,14 +62,14 @@
 				<Font size="16.0" />
 			</font>
 		</Button>
-		<Text fill="#434343" layoutX="254.0" layoutY="358.0"
+		<Text fill="#434343" layoutX="256.0" layoutY="358.0"
 			strokeType="OUTSIDE" strokeWidth="0.0" text="End Time"
 			wrappingWidth="181.0">
 			<font>
 				<Font size="17.0" />
 			</font>
 		</Text>
-		<ChoiceBox fx:id="apptEndTimePicker" layoutX="254.0"
+		<ChoiceBox fx:id="apptEndTimePicker" layoutX="256.0"
 			layoutY="369.0" prefHeight="27.0" prefWidth="181.0" />
 		<Text fx:id="errMsgText" fill="RED" layoutX="314.0"
 			layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" />

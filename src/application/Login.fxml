@@ -10,14 +10,14 @@
 
 <AnchorPane prefHeight="560" prefWidth="850"
 	style="-fx-background-color: WHITE;" stylesheets="@application.css"
-	xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml"
+	xmlns="http://javafx.com/javafx/15.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.LoginController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb600"
 			height="560.0" stroke="TRANSPARENT" strokeType="INSIDE" width="425.0" />
 		<Label id="PrimaryFont" layoutX="493.0" layoutY="181.0"
-			prefHeight="29.0" prefWidth="85.0" text="Sign In" textFill="#434343">
+			prefHeight="29.0" prefWidth="289.0" text="Sign In" textFill="#434343">
 			<font>
 				<Font name="Raleway Bold" size="24.0" />
 			</font>
