@@ -10,11 +10,11 @@
 
 <fx:root prefHeight="560" prefWidth="650"
 	stylesheets="@application.css" type="AnchorPane"
-	xmlns="http://javafx.com/javafx/15.0.1"
-	xmlns:fx="http://javafx.com/fxml/1">
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml">
 	<children>
 		<Text id="PrimaryText" fx:id="bookApptTitleText" fill="#434343"
-			layoutX="60.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0"
+			layoutX="50.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0"
 			text="Settings" wrappingWidth="318.21630859375">
 			<font>
 				<Font name="Raleway Bold" size="30.0" />

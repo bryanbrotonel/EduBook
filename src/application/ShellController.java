@@ -6,18 +6,19 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.UserSession;
-import javafx.scene.input.MouseEvent;
 
 /**
  * @author bryan
@@ -34,7 +35,7 @@ public class ShellController extends AnchorPane {
 	@FXML
 	Text dashboardNav;
 	@FXML
-	Text logOutBtn;
+	Button logOutBtn;
 
 	@FXML
 	void initialize() throws SQLException {
@@ -60,7 +61,7 @@ public class ShellController extends AnchorPane {
 	}
 
 	@FXML
-	public void logOutBtnListener(MouseEvent event) throws SQLException, IOException {
+	public void logOutBtnListener(ActionEvent event) throws SQLException, IOException {
 
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);

@@ -8,32 +8,53 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560" prefWidth="850" style="-fx-background-color: WHITE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<AnchorPane prefHeight="560" prefWidth="850"
+	style="-fx-background-color: WHITE;" stylesheets="@application.css"
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="application.LoginController">
 	<children>
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb600" height="560.0" stroke="TRANSPARENT" strokeType="INSIDE" width="425.0" />
-		<Label id="PrimaryFont" alignment="CENTER" layoutX="45.0" layoutY="208.0" prefHeight="76.0" prefWidth="123.0" styleClass="fuck" text="Edu" textFill="WHITE">
-			<font>
-				<Font name="Raleway Bold" size="64.0" />
-			</font>
-		</Label>
-		<Label id="PrimaryFont" alignment="CENTER" layoutX="168.0" layoutY="208.0" prefHeight="76.0" prefWidth="159.0" text="Book" textFill="#434343">
-			<font>
-				<Font name="Raleway Bold" size="64.0" />
-			</font>
-		</Label>
-		<Label id="SecondaryText" layoutX="45.0" layoutY="281.0" prefHeight="29.0" prefWidth="335.0" text="For Student and Professor Appointment Bookings" textFill="WHITE">
-			<font>
-				<Font name="Raleway Bold" size="14.0" />
-			</font>
-		</Label>
-		<Label id="PrimaryFont" layoutX="493.0" layoutY="181.0" prefHeight="29.0" prefWidth="85.0" text="Sign In" textFill="#434343">
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb600"
+			height="560.0" stroke="TRANSPARENT" strokeType="INSIDE" width="425.0" />
+		<Label id="PrimaryFont" layoutX="493.0" layoutY="181.0"
+			prefHeight="29.0" prefWidth="85.0" text="Sign In" textFill="#434343">
 			<font>
 				<Font name="Raleway Bold" size="24.0" />
 			</font>
 		</Label>
-		<TextField fx:id="emailTextField" layoutX="493.0" layoutY="232.0" prefHeight="27.0" prefWidth="289.0" promptText="Email" />
-		<PasswordField fx:id="passwordTextField" layoutX="493.0" layoutY="270.0" prefHeight="27.0" prefWidth="289.0" promptText="Password" />
-		<Button id="PrimaryButton" fx:id="selectBtn" layoutX="493.0" layoutY="308.0" mnemonicParsing="false" onAction="#loginBtnListener" prefHeight="27.0" prefWidth="289.0" text="Sign In" />
-		<Button id="SecondaryButton" fx:id="registerBtn" layoutX="493.0" layoutY="352.0" mnemonicParsing="false" onAction="#registerBtnListener" prefHeight="27.0" prefWidth="289.0" text="Register" />
+		<TextField fx:id="emailTextField" layoutX="493.0"
+			layoutY="232.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="Email" />
+		<PasswordField fx:id="passwordTextField" layoutX="493.0"
+			layoutY="270.0" prefHeight="27.0" prefWidth="289.0"
+			promptText="Password" />
+		<Button id="PrimaryButton" fx:id="selectBtn" layoutX="493.0"
+			layoutY="308.0" mnemonicParsing="false" onAction="#loginBtnListener"
+			prefHeight="27.0" prefWidth="289.0" text="Sign In" />
+		<Button id="SecondaryButton" fx:id="registerBtn"
+			layoutX="493.0" layoutY="352.0" mnemonicParsing="false"
+			onAction="#registerBtnListener" prefHeight="27.0" prefWidth="289.0"
+			text="Register" />
+		<Label id="PrimaryFont" layoutX="55.0" layoutY="230.0"
+			prefHeight="79.0" prefWidth="128.0" styleClass="fuck" text="Edu"
+			textFill="WHITE">
+			<font>
+				<Font name="Raleway Bold" size="64.0" />
+			</font>
+		</Label>
+		<Label id="PrimaryFont" layoutX="183.0" layoutY="230.0"
+			prefHeight="79.0" prefWidth="164.0" text="Book" textFill="#434343">
+			<font>
+				<Font name="Raleway Bold" size="64.0" />
+			</font>
+		</Label>
+		<Label id="PrimaryFont" layoutX="55.0" layoutY="303.0"
+			prefHeight="29.0" prefWidth="335.0"
+			text="For Student and Professor Appointment Bookings"
+			textFill="WHITE">
+			<font>
+				<Font name="Raleway Bold" size="14.0" />
+			</font>
+		</Label>
 	</children>
 </AnchorPane>

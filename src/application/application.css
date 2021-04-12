@@ -18,6 +18,13 @@
 /*
  * BUTTONS
  */
+ 
+ .button {
+ 	-fx-font-family: Raleway;
+	-fx-font-weight: Bold;
+	-fx-text-fill: white;
+    -fx-border-radius: 5.0;
+ }
 
 #PrimaryFont {
 	-fx-font-family: Raleway;
@@ -29,46 +36,29 @@
 }
 
 #PrimaryButton {
-	-fx-font-family: Raleway;
-	-fx-font-weight: Bold;
     -fx-background-color: #ffb600;
-    -fx-text-fill: white;
-    -fx-border-radius: 5.0;
+
 }
 
 #SecondaryButton 
 {
-	-fx-font-family: Raleway;
-	-fx-font-weight: Bold;
+
     -fx-background-color: white;
     -fx-border-color: #ffb600;
     -fx-text-fill: #434343;
-    -fx-border-radius: 5.0;
     -fx-border-width: 2.0;
 }
 
 #EditButton {
-	-fx-font-family: Raleway;
-	-fx-font-weight: Bold;
     -fx-background-color: #949494;
-    -fx-text-fill: white;
-    -fx-border-radius: 5.0;
 }
 
 #SuccessButton {
-	-fx-font-family: Raleway;
-	-fx-font-weight: Bold;
     -fx-background-color: #49A078;
-    -fx-text-fill: white;
-    -fx-border-radius: 5.0;
 }
 
 #DangerButton {
-	-fx-font-family: Raleway;
-	-fx-font-weight: Bold;
     -fx-background-color: #D64045;
-    -fx-text-fill: white;
-    -fx-border-radius: 5.0;
 }
 
 /*

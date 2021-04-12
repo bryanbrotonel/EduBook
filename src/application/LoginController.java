@@ -86,9 +86,4 @@ public class LoginController {
 		window.setScene(tableViewScene);
 		window.show();
 	}
-
-	private void verifyLogin() {
-		passwordTextField.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-		;
-	}
 }
