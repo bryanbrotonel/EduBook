@@ -10,8 +10,8 @@
 
 <AnchorPane prefHeight="560" prefWidth="850"
 	style="-fx-background-color: WHITE;" stylesheets="@application.css"
-	xmlns="http://javafx.com/javafx/15.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml"
 	fx:controller="application.LoginController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb600"
