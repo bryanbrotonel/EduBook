@@ -11,12 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import models.UserSession;
 
@@ -25,7 +25,7 @@ public class LoginController {
 	@FXML
 	TextField emailTextField;
 	@FXML
-	TextField passwordTextField;
+	PasswordField passwordTextField;
 	@FXML
 	Button selectBtn;
 	@FXML
@@ -42,21 +42,26 @@ public class LoginController {
 	@FXML
 	public void loginBtnListener(ActionEvent event) throws SQLException, IOException {
 
-		int userFound = 0;
-
 		statement = connection.createStatement();
 
-		String sqlSelect = "SELECT count(*) FROM USERS WHERE EMAIL='" + emailTextField.getText() + "';";
+		String sqlSelect = "SELECT * FROM USERS WHERE EMAIL='" + emailTextField.getText() + "';";
 
 		ResultSet resultSet = statement.executeQuery(sqlSelect);
 
-		while (resultSet.next())
-			userFound = resultSet.getInt(1);
-
-		if (userFound >= 1) {
-			UserSession.getInstance(emailTextField.getText());
-
-			redirectLogIn(event);
+		if (resultSet.next() == false) {
+			emailTextField.setStyle("-fx-border-color: #D64045; -fx-focus-color: #D64045;");
+			if (passwordTextField.getText() != "")
+				passwordTextField.setStyle("-fx-border-color: #D64045; -fx-focus-color: #D64045;");
+		} else {
+			do {
+				if (!passwordTextField.getText().equals(resultSet.getObject("Password"))) {
+					emailTextField.setStyle("-fx-border-color: #CED4DA; -fx-focus-color: #CED4DA;");
+					passwordTextField.setStyle("-fx-border-color: #D64045; -fx-focus-color: #D64045;");
+				} else {
+					UserSession.getInstance(emailTextField.getText());
+					redirectLogIn(event);
+				}
+			} while (resultSet.next());
 		}
 
 	}
@@ -80,5 +85,10 @@ public class LoginController {
 
 		window.setScene(tableViewScene);
 		window.show();
+	}
+
+	private void verifyLogin() {
+		passwordTextField.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+		;
 	}
 }
