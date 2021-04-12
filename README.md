@@ -5,5 +5,4 @@ Edubook is a scheduling application for both students and professors. Built with
 
 ## Authors
 Bryan Brotonel  
-Yuanqi Feng  
 Kirt Fowler
